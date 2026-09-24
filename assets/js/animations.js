@@ -43,7 +43,7 @@ function positionOrbitIcons() {
 
 function initFloatLoops(gsap) {
   if (reducedMotion) return;
-  gsap.utils.toArray("[data-float-card], [data-float-social], .orbit-icon").forEach((el, i) => {
+  gsap.utils.toArray("[data-float-card], .orbit-icon").forEach((el, i) => {
     gsap.to(el, {
       y: i % 2 === 0 ? 8 : -8,
       duration: 3 + (i % 3),

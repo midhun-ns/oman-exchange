@@ -19,6 +19,11 @@ export async function getRates() {
   return res.json();
 }
 
+/** Look up a transfer rate row by currency code. */
+export function getRate(data, code) {
+  return data?.transfer?.find((r) => r.code === code) ?? null;
+}
+
 function qs(sel, root = document) {
   return root.querySelector(sel);
 }
@@ -595,10 +600,10 @@ async function initNav() {
   const sheet = qs("[data-nav-sheet]");
   if (!header || !nav || !linksRoot) return;
 
-  let rateText = "Today's rate: 1.00 OMR = 248.45 INR";
+  let rateText = "Today's rate: 1.00 OMR = 248.55 INR";
   try {
     const data = await getRates();
-    const inr = data.transfer?.find((r) => r.code === "INR");
+    const inr = getRate(data, "INR");
     if (inr) rateText = `Today's rate: 1.00 OMR = ${formatRate(inr.rate)} INR`;
   } catch {
     /* keep fallback */
@@ -759,7 +764,7 @@ async function initRates() {
     el.textContent = data.disclaimer;
   });
 
-  const inr = data.transfer.find((r) => r.code === "INR");
+  const inr = getRate(data, "INR");
   if (inr && heroRate) {
     heroRate.textContent = `1.00 OMR = ${formatRate(inr.rate)} INR`;
   }
@@ -849,12 +854,12 @@ async function initRates() {
       .map((c) => `<option value="${c.code}" data-rate="${c.rate}">${c.code} — ${c.name}</option>`)
       .join("");
 
-    const usd = data.transfer.find((r) => r.code === "USD");
-    const kwd = data.transfer.find((r) => r.code === "KWD");
+    const usd = getRate(data, "USD");
+    const aed = getRate(data, "AED");
     if (mini) {
       mini.innerHTML = [
         usd ? `<span>USD · ${formatRate(usd.rate)}</span>` : "",
-        kwd ? `<span>KWD · ${formatRate(kwd.rate)}</span>` : "",
+        aed ? `<span>AED · ${formatRate(aed.rate)}</span>` : "",
       ].join("");
     }
 
@@ -879,6 +884,163 @@ function initBackToTop() {
   });
 }
 
+async function initRateStrip() {
+  const root = qs(".rate-strip");
+  if (!root) return;
+
+  let data;
+  try {
+    data = await getRates();
+  } catch (err) {
+    console.error(err);
+    return;
+  }
+
+  const fmt = (n) =>
+    Number(n).toLocaleString("en-US", {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    });
+
+  const base = data.base;
+  const baseEl = qs(".rate-strip__base", root);
+  if (baseEl && base) {
+    const flag = typeof base.flag === "string" ? base.flag : "omr.svg";
+    baseEl.innerHTML = `
+      <img class="rate-strip__flag" src="/assets/img/flags/${flag}" alt="" width="28" height="28">
+      ${fmt(base.amount ?? 1)} <small>${base.code ?? "OMR"}</small>`;
+  }
+
+  const list = qs(".rate-strip__list", root);
+  if (list) {
+    list.innerHTML = (data.transfer || [])
+      .map(
+        (c) => `
+      <li class="rate-strip__item">
+        <span class="rate-strip__name">${c.name}</span>
+        <span class="rate-strip__row">
+          <span class="rate-strip__value">${fmt(c.rate)}</span>
+          <span class="rate-strip__code">${c.code}</span>
+          <img class="rate-strip__flag" src="/assets/img/flags/${c.flag}" alt="" width="28" height="28" loading="lazy">
+        </span>
+      </li>`
+      )
+      .join("");
+  }
+
+  const updatedEl = qs(".rate-strip__updated", root);
+  if (updatedEl && data.updated) {
+    const d = new Date(data.updated);
+    updatedEl.textContent = `Updated ${d.toLocaleDateString("en-GB", {
+      day: "numeric",
+      month: "short",
+      year: "numeric",
+    })}.`;
+  }
+
+  if (!list) return;
+
+  const [prev, next] = qsa(".rate-strip__btn", root);
+  const rtl = document.documentElement.dir === "rtl" ? -1 : 1;
+  const step = () => (list.querySelector(".rate-strip__item")?.offsetWidth || 220) * 2;
+
+  const sync = () => {
+    if (prev) prev.disabled = list.scrollLeft < 4;
+    if (next) next.disabled = list.scrollLeft + list.clientWidth >= list.scrollWidth - 4;
+  };
+
+  qsa(".rate-strip__btn", root).forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const dir = Number(btn.dataset.dir) * rtl;
+      list.scrollBy({ left: step() * dir, behavior: "smooth" });
+    });
+  });
+
+  list.addEventListener("scroll", sync, { passive: true });
+  sync();
+
+  const setH = () => {
+    document.documentElement.style.setProperty("--rate-strip-h", `${root.offsetHeight}px`);
+    const tall =
+      root.offsetHeight > 320 && window.matchMedia("(max-width: 809px)").matches;
+    root.classList.toggle("rate-strip--tall", tall);
+  };
+  if (typeof ResizeObserver !== "undefined") {
+    new ResizeObserver(setH).observe(root);
+  }
+  window.addEventListener("resize", setH, { passive: true });
+  setH();
+
+  const inner = qs(".rate-strip__inner", root);
+  if (inner) {
+    const reveal = () => {
+      root.classList.add("is-visible");
+      inner.classList.add("is-visible");
+    };
+    if (reducedMotion || !("IntersectionObserver" in window)) {
+      reveal();
+    } else {
+      const io = new IntersectionObserver(
+        (entries) => {
+          if (entries.some((e) => e.isIntersecting)) {
+            reveal();
+            io.disconnect();
+          }
+        },
+        { threshold: 0, rootMargin: "0px 0px -10% 0px" }
+      );
+      io.observe(qs("#benefits") || root);
+    }
+  }
+}
+
+function initCtaPhone() {
+  const phone = qs("[data-cta-phone]");
+  if (!phone) return;
+  const slides = qsa("[data-cta-slide]", phone);
+  if (slides.length < 2) return;
+
+  if (reducedMotion) {
+    slides.forEach((el, i) => el.classList.toggle("is-active", i === 0));
+    return;
+  }
+
+  let index = 0;
+  let timer = null;
+
+  const show = (i) => {
+    slides.forEach((el, n) => el.classList.toggle("is-active", n === i));
+  };
+
+  const tick = () => {
+    index = (index + 1) % slides.length;
+    show(index);
+  };
+
+  const start = () => {
+    if (timer) return;
+    timer = window.setInterval(tick, 3500);
+  };
+
+  const stop = () => {
+    if (!timer) return;
+    window.clearInterval(timer);
+    timer = null;
+  };
+
+  if ("IntersectionObserver" in window) {
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => (entry.isIntersecting ? start() : stop()));
+      },
+      { threshold: 0.25 }
+    );
+    io.observe(phone);
+  } else {
+    start();
+  }
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   initNav();
   initAccordions();
@@ -886,4 +1048,6 @@ document.addEventListener("DOMContentLoaded", () => {
   initReveal();
   initRates();
   initBackToTop();
+  initRateStrip();
+  initCtaPhone();
 });

@@ -1,19 +1,29 @@
 {
-  "lastUpdated": "2026-09-23T12:00:00+04:00",
-  "base": "OMR",
+  "updated": "2026-09-24",
+  "lastUpdated": "2026-09-24T12:00:00+04:00",
+  "base": { "code": "OMR", "amount": 1.0, "flag": "omr.svg" },
   "disclaimer": "Rates are indicative and subject to change. Contact our nearest branch for the latest rates.",
   "transfer": [
-    { "code": "USD", "name": "US Dollar", "rate": 2.5974, "flag": "us" },
-    { "code": "INR", "name": "Indian Rupee", "rate": 248.45, "flag": "in", "featured": true },
-    { "code": "PHP", "name": "Philippine Peso", "rate": 151.32, "flag": "ph" },
-    { "code": "BDT", "name": "Bangladesh Taka", "rate": 314.80, "flag": "bd" },
-    { "code": "KWD", "name": "Kuwait Dinar", "rate": 0.7982, "flag": "kw" }
+    { "code": "INR", "name": "Indian Rupee", "rate": 248.55, "flag": "inr.svg", "featured": true },
+    { "code": "PKR", "name": "Pakistani Rupee", "rate": 719.9, "flag": "pkr.svg" },
+    { "code": "BDT", "name": "Bangladeshi Taka", "rate": 319.15, "flag": "bdt.svg" },
+    { "code": "PHP", "name": "Philippine Peso", "rate": 162.1, "flag": "php.svg" },
+    { "code": "NPR", "name": "Nepalese Rupee", "rate": 396.6, "flag": "npr.svg" },
+    { "code": "LKR", "name": "Sri Lankan Rupee", "rate": 853.6, "flag": "lkr.svg" },
+    { "code": "EGP", "name": "Egyptian Pound", "rate": 123.18, "flag": "egp.svg" },
+    { "code": "IDR", "name": "Indonesian Rupiah", "rate": 42662.12, "flag": "idr.svg" },
+    { "code": "AED", "name": "UAE Dirham", "rate": 9.53, "flag": "aed.svg" },
+    { "code": "SAR", "name": "Saudi Riyal", "rate": 9.74, "flag": "sar.svg" },
+    { "code": "USD", "name": "US Dollar", "rate": 2.59, "flag": "usd.svg" },
+    { "code": "GBP", "name": "British Pound", "rate": 1.56, "flag": "gbp.svg" },
+    { "code": "EUR", "name": "Euro", "rate": 1.95, "flag": "eur.svg" },
+    { "code": "JOD", "name": "Jordanian Dinar", "rate": 1.84, "flag": "jod.svg" }
   ],
   "exchange": [
-    { "code": "USD", "name": "US Dollar", "buy": 2.5800, "sell": 2.6150, "flag": "us" },
-    { "code": "INR", "name": "Indian Rupee", "buy": 246.10, "sell": 250.80, "flag": "in", "featured": true },
-    { "code": "PHP", "name": "Philippine Peso", "buy": 149.50, "sell": 153.20, "flag": "ph" },
-    { "code": "BDT", "name": "Bangladesh Taka", "buy": 310.00, "sell": 319.50, "flag": "bd" },
-    { "code": "KWD", "name": "Kuwait Dinar", "buy": 0.7900, "sell": 0.8100, "flag": "kw" }
+    { "code": "USD", "name": "US Dollar", "buy": 2.58, "sell": 2.615, "flag": "usd.svg" },
+    { "code": "INR", "name": "Indian Rupee", "buy": 246.1, "sell": 250.8, "flag": "inr.svg", "featured": true },
+    { "code": "PHP", "name": "Philippine Peso", "buy": 160.5, "sell": 163.8, "flag": "php.svg" },
+    { "code": "BDT", "name": "Bangladeshi Taka", "buy": 315.0, "sell": 323.5, "flag": "bdt.svg" },
+    { "code": "AED", "name": "UAE Dirham", "buy": 9.45, "sell": 9.62, "flag": "aed.svg" }
   ]
 }

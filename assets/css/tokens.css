@@ -87,6 +87,8 @@
   --container-wide: 1344px;
   --section-pad-x: 48px;
   --section-pad-y: 80px;
+  --rate-strip-gap: 72px;
+  --benefits-overlap: 60px;
   --gutter: clamp(1rem, 4vw, 3rem);
   --section-y: clamp(4rem, 8vw, 5rem);
 
