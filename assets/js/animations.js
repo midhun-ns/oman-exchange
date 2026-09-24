@@ -27,23 +27,9 @@ function waitForGsap() {
   });
 }
 
-function positionOrbitIcons() {
-  const orbit = document.querySelector("[data-orbit]");
-  if (!orbit) return;
-  const icons = [...orbit.querySelectorAll(".orbit-icon")];
-  const n = icons.length;
-  const radius = Math.min(orbit.clientWidth, orbit.clientHeight) * 0.38;
-  icons.forEach((el, i) => {
-    const angle = (i / n) * Math.PI * 2 - Math.PI / 2;
-    const x = Math.cos(angle) * radius;
-    const y = Math.sin(angle) * radius;
-    el.style.transform = `translate(${x}px, ${y}px)`;
-  });
-}
-
 function initFloatLoops(gsap) {
   if (reducedMotion) return;
-  gsap.utils.toArray("[data-float-card], .orbit-icon").forEach((el, i) => {
+  gsap.utils.toArray("[data-float-card]").forEach((el, i) => {
     gsap.to(el, {
       y: i % 2 === 0 ? 8 : -8,
       duration: 3 + (i % 3),
@@ -256,9 +242,6 @@ function initFooter(gsap) {
 }
 
 ready(async () => {
-  positionOrbitIcons();
-  window.addEventListener("resize", positionOrbitIcons);
-
   await waitForGsap();
   const { gsap, ScrollTrigger } = window;
   gsap.registerPlugin(ScrollTrigger);

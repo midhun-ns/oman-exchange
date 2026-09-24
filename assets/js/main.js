@@ -1041,6 +1041,98 @@ function initCtaPhone() {
   }
 }
 
+async function initPresenceMap() {
+  const wrap = qs(".presence__map");
+  const host = qs("[data-presence-map]", wrap || document);
+  if (!wrap || !host) return;
+
+  try {
+    const res = await fetch("/assets/img/oman-branch-map.svg", { cache: "force-cache" });
+    if (!res.ok) throw new Error(`Map SVG ${res.status}`);
+    host.innerHTML = await res.text();
+  } catch (err) {
+    console.error(err);
+    return;
+  }
+
+  const svg = qs(".oman-map", host);
+  const tip = qs(".presence__tip", wrap);
+  const nameEl = qs(".presence__tip-name", tip);
+  const link = qs(".presence__tip-link", tip);
+  if (!svg || !tip || !nameEl || !link) return;
+
+  const landDots = qsa(".om-land circle", svg);
+  landDots.forEach((dot, i) => dot.style.setProperty("--i", String(i)));
+
+  const dots = qsa(".om-branch", svg);
+  let active = null;
+
+  const placeTip = (dot) => {
+    const w = wrap.getBoundingClientRect();
+    const d = dot.getBoundingClientRect();
+    const rawLeft = d.left - w.left + d.width / 2;
+    const top = d.top - w.top + d.height / 2;
+    const tipW = tip.offsetWidth || 168;
+    const half = tipW / 2;
+    const margin = 8;
+    const clamped = Math.min(Math.max(rawLeft, half + margin), w.width - half - margin);
+    const arrowPct = 50 + ((rawLeft - clamped) / tipW) * 100;
+    tip.style.setProperty("--arrow-x", `${Math.min(Math.max(arrowPct, 12), 88)}%`);
+    tip.style.left = `${clamped}px`;
+    tip.style.top = `${top}px`;
+  };
+
+  const show = (dot) => {
+    if (!dot) return;
+    active?.classList.remove("is-active");
+    active = dot;
+    dot.classList.add("is-active");
+    nameEl.textContent = dot.dataset.name || "";
+    link.href = dot.dataset.url || "#";
+    tip.hidden = false;
+    placeTip(dot);
+  };
+
+  dots.forEach((dot) => {
+    dot.addEventListener("mouseenter", () => show(dot));
+    dot.addEventListener("focus", () => show(dot));
+    dot.addEventListener("click", () => show(dot));
+    dot.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" && dot.dataset.url) {
+        window.open(dot.dataset.url, "_blank", "noopener");
+      }
+    });
+  });
+
+  const defaultDot =
+    dots.find((d) => d.dataset.name === "Al Ghubra – Main") || dots[0];
+  show(defaultDot);
+
+  if (typeof ResizeObserver !== "undefined") {
+    new ResizeObserver(() => active && placeTip(active)).observe(wrap);
+  }
+
+  if (reducedMotion) {
+    svg.classList.add("is-in");
+    return;
+  }
+
+  if ("IntersectionObserver" in window) {
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((e) => e.isIntersecting)) {
+          svg.classList.add("is-in");
+          io.disconnect();
+        }
+      },
+      { threshold: 0.2 }
+    );
+    io.observe(wrap);
+  } else {
+    svg.classList.add("is-in");
+  }
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   initNav();
   initAccordions();
@@ -1050,4 +1142,5 @@ document.addEventListener("DOMContentLoaded", () => {
   initBackToTop();
   initRateStrip();
   initCtaPhone();
+  initPresenceMap();
 });

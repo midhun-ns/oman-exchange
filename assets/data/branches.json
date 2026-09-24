@@ -1,0 +1,268 @@
+[
+ {
+  "name": "Khasab",
+  "x": 235.5,
+  "y": 26.5,
+  "directions": "https://www.google.com/maps/dir/?api=1&destination=26.1993363,56.2496015",
+  "hasCoords": true
+ },
+ {
+  "name": "Sohar",
+  "x": 257.5,
+  "y": 125.5,
+  "directions": "https://www.google.com/maps/search/?api=1&query=LuLu+Exchange+Sohar+Oman",
+  "hasCoords": false
+ },
+ {
+  "name": "LuLu Sohar",
+  "x": 257.5,
+  "y": 136.5,
+  "directions": "https://www.google.com/maps/dir/?api=1&destination=24.3404266,56.7308888",
+  "hasCoords": true
+ },
+ {
+  "name": "Saham",
+  "x": 268.5,
+  "y": 136.5,
+  "directions": "https://www.google.com/maps/dir/?api=1&destination=24.1436834,56.8738221",
+  "hasCoords": true
+ },
+ {
+  "name": "Khaboura",
+  "x": 279.5,
+  "y": 136.5,
+  "directions": "https://www.google.com/maps/dir/?api=1&destination=23.9640778,57.0929037",
+  "hasCoords": true
+ },
+ {
+  "name": "Souq Al Khoud",
+  "x": 279.5,
+  "y": 147.5,
+  "directions": "https://www.google.com/maps/dir/?api=1&destination=23.6317449,58.196682",
+  "hasCoords": true
+ },
+ {
+  "name": "Khadra",
+  "x": 290.5,
+  "y": 147.5,
+  "directions": "https://www.google.com/maps/dir/?api=1&destination=23.856726,57.3303307",
+  "hasCoords": true
+ },
+ {
+  "name": "LuLu Suwaiq",
+  "x": 290.5,
+  "y": 158.5,
+  "directions": "https://www.google.com/maps/dir/?api=1&destination=23.8287297,57.4236175",
+  "hasCoords": true
+ },
+ {
+  "name": "Tharmad",
+  "x": 301.5,
+  "y": 158.5,
+  "directions": "https://www.google.com/maps/dir/?api=1&destination=23.7860244,57.5196287",
+  "hasCoords": true
+ },
+ {
+  "name": "Barka",
+  "x": 312.5,
+  "y": 158.5,
+  "directions": "https://www.google.com/maps/dir/?api=1&destination=23.668354,57.8801012",
+  "hasCoords": true
+ },
+ {
+  "name": "Maabelah",
+  "x": 323.5,
+  "y": 158.5,
+  "directions": "https://www.google.com/maps/dir/?api=1&destination=23.6792888,58.1370417",
+  "hasCoords": true
+ },
+ {
+  "name": "Ghubra South",
+  "x": 334.5,
+  "y": 158.5,
+  "directions": "https://www.google.com/maps/search/?api=1&query=LuLu+Exchange+Ghubra+South+Oman",
+  "hasCoords": false
+ },
+ {
+  "name": "Al Bahja",
+  "x": 301.5,
+  "y": 169.5,
+  "directions": "https://www.google.com/maps/search/?api=1&query=LuLu+Exchange+Al+Bahja+Oman",
+  "hasCoords": false
+ },
+ {
+  "name": "Ghubra Souq",
+  "x": 312.5,
+  "y": 169.5,
+  "directions": "https://www.google.com/maps/search/?api=1&query=LuLu+Exchange+Ghubra+Souq+Oman",
+  "hasCoords": false
+ },
+ {
+  "name": "Souk Al Khoud",
+  "x": 323.5,
+  "y": 169.5,
+  "directions": "https://www.google.com/maps/search/?api=1&query=LuLu+Exchange+Souk+Al+Khoud+Oman",
+  "hasCoords": false
+ },
+ {
+  "name": "Al Khoud",
+  "x": 334.5,
+  "y": 169.5,
+  "directions": "https://www.google.com/maps/dir/?api=1&destination=23.6386132,58.2009744",
+  "hasCoords": true
+ },
+ {
+  "name": "Al Ghubra – Main",
+  "x": 345.5,
+  "y": 169.5,
+  "directions": "https://www.google.com/maps/dir/?api=1&destination=23.5909457,58.4017058",
+  "hasCoords": true
+ },
+ {
+  "name": "Ruwi",
+  "x": 356.5,
+  "y": 169.5,
+  "directions": "https://www.google.com/maps/search/?api=1&query=LuLu+Exchange+Ruwi+Oman",
+  "hasCoords": false
+ },
+ {
+  "name": "Darsait",
+  "x": 367.5,
+  "y": 169.5,
+  "directions": "https://www.google.com/maps/dir/?api=1&destination=23.617981,58.5427811",
+  "hasCoords": true
+ },
+ {
+  "name": "LuLu Rustaq",
+  "x": 290.5,
+  "y": 180.5,
+  "directions": "https://www.google.com/maps/search/?api=1&query=LuLu+Exchange+LuLu+Rustaq+Oman",
+  "hasCoords": false
+ },
+ {
+  "name": "Al Bandar",
+  "x": 323.5,
+  "y": 180.5,
+  "directions": "https://www.google.com/maps/dir/?api=1&destination=23.5862112,58.1991984",
+  "hasCoords": true
+ },
+ {
+  "name": "Ghala",
+  "x": 334.5,
+  "y": 180.5,
+  "directions": "https://www.google.com/maps/search/?api=1&query=LuLu+Exchange+Ghala+Oman",
+  "hasCoords": false
+ },
+ {
+  "name": "Boushar",
+  "x": 345.5,
+  "y": 180.5,
+  "directions": "https://www.google.com/maps/dir/?api=1&destination=23.5913314,58.3398489",
+  "hasCoords": true
+ },
+ {
+  "name": "Al Khuwair",
+  "x": 356.5,
+  "y": 180.5,
+  "directions": "https://www.google.com/maps/dir/?api=1&destination=23.5909275,58.4258222",
+  "hasCoords": true
+ },
+ {
+  "name": "Wadi Al Kabir – Muscat 1",
+  "x": 367.5,
+  "y": 180.5,
+  "directions": "https://www.google.com/maps/dir/?api=1&destination=23.579265,58.5598473",
+  "hasCoords": true
+ },
+ {
+  "name": "Sur",
+  "x": 378.5,
+  "y": 180.5,
+  "directions": "https://www.google.com/maps/dir/?api=1&destination=22.5957352,59.4357574",
+  "hasCoords": true
+ },
+ {
+  "name": "Ibri",
+  "x": 279.5,
+  "y": 202.5,
+  "directions": "https://www.google.com/maps/dir/?api=1&destination=23.2588726,56.5217998",
+  "hasCoords": true
+ },
+ {
+  "name": "Nizwa",
+  "x": 323.5,
+  "y": 202.5,
+  "directions": "https://www.google.com/maps/dir/?api=1&destination=22.8756946,57.5362437",
+  "hasCoords": true
+ },
+ {
+  "name": "Sinaw",
+  "x": 334.5,
+  "y": 202.5,
+  "directions": "https://www.google.com/maps/search/?api=1&query=LuLu+Exchange+Sinaw+Oman",
+  "hasCoords": false
+ },
+ {
+  "name": "LuLu Amerat",
+  "x": 367.5,
+  "y": 202.5,
+  "directions": "https://www.google.com/maps/search/?api=1&query=LuLu+Exchange+LuLu+Amerat+Oman",
+  "hasCoords": false
+ },
+ {
+  "name": "Jalan Bani Buali",
+  "x": 411.5,
+  "y": 246.5,
+  "directions": "https://www.google.com/maps/dir/?api=1&destination=22.0462778,59.3162537",
+  "hasCoords": true
+ },
+ {
+  "name": "Masirah",
+  "x": 400.5,
+  "y": 290.5,
+  "directions": "https://www.google.com/maps/dir/?api=1&destination=20.6612682,58.8710947",
+  "hasCoords": true
+ },
+ {
+  "name": "Taqah",
+  "x": 301.5,
+  "y": 422.5,
+  "directions": "https://www.google.com/maps/dir/?api=1&destination=17.0390972,54.3878674",
+  "hasCoords": true
+ },
+ {
+  "name": "LuLu Center Salalah",
+  "x": 279.5,
+  "y": 433.5,
+  "directions": "https://www.google.com/maps/search/?api=1&query=LuLu+Exchange+LuLu+Center+Salalah+Oman",
+  "hasCoords": false
+ },
+ {
+  "name": "Salalah",
+  "x": 290.5,
+  "y": 433.5,
+  "directions": "https://www.google.com/maps/search/?api=1&query=LuLu+Exchange+Salalah+Oman",
+  "hasCoords": false
+ },
+ {
+  "name": "Mirbat",
+  "x": 301.5,
+  "y": 433.5,
+  "directions": "https://www.google.com/maps/search/?api=1&query=LuLu+Exchange+Mirbat+Oman",
+  "hasCoords": false
+ },
+ {
+  "name": "LuLu Salalah",
+  "x": 290.5,
+  "y": 444.5,
+  "directions": "https://www.google.com/maps/search/?api=1&query=LuLu+Exchange+LuLu+Salalah+Oman",
+  "hasCoords": false
+ },
+ {
+  "name": "Salalah Grand Mall",
+  "x": 81.5,
+  "y": 565.5,
+  "directions": "https://www.google.com/maps/search/?api=1&query=LuLu+Exchange+Salalah+Grand+Mall+Oman",
+  "hasCoords": false
+ }
+]
