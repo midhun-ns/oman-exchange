@@ -478,11 +478,26 @@ function renderMobileSheet(sheet, rateText) {
   }).join("");
 
   sheet.innerHTML = `
-    <div class="nav-sheet__list">${rows}</div>
+    <nav class="nav-sheet__list" aria-label="Primary">${rows}</nav>
     <div class="nav-sheet__footer">
-      <p class="rates-disclaimer" style="margin:0;text-align:start;" data-nav-rate>${rateText}</p>
-      <a class="nav-sheet__branch" href="https://luluexchange.com.om/branch-locator/" target="_blank" rel="noopener">Locate a branch</a>
+      <p class="nav-sheet__rate" data-nav-rate>${rateText}</p>
+      <div class="nav-sheet__country" data-sheet-country></div>
+      <a class="btn btn--of-primary nav-sheet__branch" href="https://luluexchange.com.om/branch-locator/" target="_blank" rel="noopener">Locate a branch</a>
     </div>`;
+}
+
+function placeCountryPicker() {
+  const picker = qs("[data-country-picker]");
+  const slot = qs("[data-sheet-country]");
+  const actions = qs(".navbar__actions");
+  const toggle = qs("[data-nav-toggle]");
+  if (!picker || !actions || !toggle) return;
+
+  if (window.matchMedia("(max-width: 1023px)").matches && slot) {
+    if (picker.parentElement !== slot) slot.appendChild(picker);
+  } else if (picker.parentElement !== actions) {
+    actions.insertBefore(picker, toggle);
+  }
 }
 
 function initNavTheme(header) {
@@ -698,6 +713,15 @@ function initMobileSheet(header, nav, sheet) {
     toggle.setAttribute("aria-expanded", String(open));
     sheet.setAttribute("aria-hidden", String(!open));
     document.body.style.overflow = open ? "hidden" : "";
+    if (!open) {
+      const picker = qs("[data-country-picker]");
+      if (picker?.classList.contains("is-open")) {
+        picker.classList.remove("is-open");
+        qs("[data-country-trigger]", picker)?.setAttribute("aria-expanded", "false");
+        qs("[data-country-panel]", picker)?.setAttribute("aria-hidden", "true");
+        document.querySelector(".country-picker-backdrop")?.remove();
+      }
+    }
   };
 
   toggle.addEventListener("click", (e) => {
@@ -761,7 +785,7 @@ function initCountryPicker() {
 
   const options = () => qsa("[data-country-option]", menu);
   let backdrop = null;
-  const isMobile = () => window.matchMedia("(max-width: 809px)").matches;
+  const isMobile = () => window.matchMedia("(max-width: 1023px)").matches;
 
   const close = () => {
     root.classList.remove("is-open");
@@ -778,7 +802,9 @@ function initCountryPicker() {
     root.classList.add("is-open");
     trigger.setAttribute("aria-expanded", "true");
     panel.setAttribute("aria-hidden", "false");
-    if (isMobile()) {
+    /* Backdrop on body sits above the drawer stacking context and blocks taps.
+       Skip it when the picker lives inside the nav sheet. */
+    if (isMobile() && !root.closest("[data-nav-sheet]")) {
       backdrop = document.createElement("div");
       backdrop.className = "country-picker-backdrop";
       backdrop.addEventListener("click", close);
@@ -848,6 +874,8 @@ async function initNav() {
 
   renderDesktopNav(linksRoot, rateText);
   if (sheet) renderMobileSheet(sheet, rateText);
+  placeCountryPicker();
+  window.addEventListener("resize", placeCountryPicker, { passive: true });
 
   initDesktopDropdowns(linksRoot);
   initNavActive(linksRoot, header);

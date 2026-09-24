@@ -137,3 +137,18 @@
   --text-on-brand: var(--white);
   --border-subtle: var(--grey-300);
 }
+
+@media (max-width: 809px) {
+  :root {
+    --section-pad-x: 16px;
+  }
+}
+
+@media (max-width: 425px) {
+  :root {
+    --section-pad-x: 16px;
+    --gutter: 1rem;
+    --rate-strip-gap: 16px;
+    --benefits-overlap: 48px;
+  }
+}
