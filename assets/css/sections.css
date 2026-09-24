@@ -1858,7 +1858,7 @@
 
 .hero__title {
   margin: 0 0 24px;
-  font: 900 clamp(52px, 7.4vw, 112px) / 0.92 var(--font-display);
+  font: 900 clamp(52px, 7.4vw, 82px) / 0.92 var(--font-display);
   text-transform: uppercase;
   letter-spacing: -0.05em;
   color: #fff;
