@@ -27,47 +27,130 @@ function waitForGsap() {
   });
 }
 
-function initFloatLoops(gsap) {
-  if (reducedMotion) return;
-  gsap.utils.toArray("[data-float-card]").forEach((el, i) => {
-    gsap.to(el, {
-      y: i % 2 === 0 ? 8 : -8,
-      duration: 3 + (i % 3),
-      yoyo: true,
-      repeat: -1,
-      ease: "sine.inOut",
-      delay: i * 0.15,
-    });
+function isVisible(el) {
+  return !!el && getComputedStyle(el).display !== "none" && el.getClientRects().length > 0;
+}
+
+function setOrbitOrigins(card, icons) {
+  const c = card.getBoundingClientRect();
+  const cx = c.left + c.width / 2;
+  const cy = c.top + c.height / 2;
+  icons.forEach((el) => {
+    const r = el.getBoundingClientRect();
+    el.style.setProperty("--from-x", `${cx - (r.left + r.width / 2)}px`);
+    el.style.setProperty("--from-y", `${cy - (r.top + r.height / 2)}px`);
   });
 }
 
-function initHero(gsap) {
-  const phone = document.querySelector("[data-hero-phone]");
-  if (!phone || reducedMotion) {
-    phone?.style.setProperty("opacity", "1");
+function waitHeroAssets(imgs, capMs = 800) {
+  const fonts = document.fonts?.ready ?? Promise.resolve();
+  const decoded = Promise.all(
+    imgs.map((img) => (img.decode ? img.decode() : Promise.resolve()).catch(() => {}))
+  );
+  return Promise.race([
+    Promise.all([fonts, decoded]),
+    new Promise((resolve) => setTimeout(resolve, capMs)),
+  ]);
+}
+
+function initHeroFloatObserver(hero, icons) {
+  if (!hero || !icons.length || !("IntersectionObserver" in window)) return;
+  const io = new IntersectionObserver(
+    ([entry]) => {
+      const on = entry?.isIntersecting;
+      icons.forEach((el) => {
+        if (!el.classList.contains("is-floating")) return;
+        const float = el.querySelector(".hero-float__float");
+        if (float) float.style.animationPlayState = on ? "running" : "paused";
+      });
+    },
+    { threshold: 0 }
+  );
+  io.observe(hero);
+}
+
+async function initHero(gsap) {
+  const hero = document.querySelector("#hero");
+  const card = document.querySelector("#hero .fx");
+  const copy = document.querySelector("#hero .hero__copy");
+  const rings = gsap.utils.toArray("#hero .hero__orbit-ring");
+  const icons = gsap.utils.toArray("#hero .hero-float").filter(isVisible);
+  const imgs = icons
+    .map((el) => el.querySelector("img"))
+    .filter(Boolean);
+
+  if (!hero || !card) return;
+
+  const finishPending = () => hero.classList.remove("hero--intro-pending");
+
+  if (reducedMotion) {
+    finishPending();
+    icons.forEach((el) => {
+      el.classList.add("is-floating");
+      const float = el.querySelector(".hero-float__float");
+      if (float) float.style.animationPlayState = "paused";
+    });
+    if (copy) gsap.set(copy, { clearProps: "all" });
     return;
   }
-  gsap.from(phone, { y: 48, opacity: 0, duration: 1, ease: "power3.out" });
-  gsap.from("[data-float-card]", {
-    y: 24,
-    opacity: 0,
-    duration: 0.9,
-    stagger: 0.12,
-    delay: 0.2,
-    ease: "power3.out",
+
+  await waitHeroAssets(imgs);
+  setOrbitOrigins(card, icons);
+
+  const mobile = window.matchMedia("(max-width: 810px)").matches;
+  const durScale = mobile ? 0.8 : 1;
+  const iconEase = mobile ? "back.out(1.1)" : "back.out(1.4)";
+
+  const tl = gsap.timeline({ defaults: { ease: "power4.out" } });
+
+  tl.from(card, {
+    autoAlpha: 0,
+    scale: 0.94,
+    y: 16,
+    duration: 0.5 * durScale,
   });
 
-  ScrollTrigger.create({
-    trigger: "#hero",
-    start: "top top",
-    end: "bottom top",
-    scrub: true,
-    onUpdate: (self) => {
-      const cards = document.querySelectorAll("[data-float-card]");
-      if (cards[0]) gsap.set(cards[0], { x: -40 * self.progress });
-      if (cards[1]) gsap.set(cards[1], { x: 40 * self.progress });
-    },
+  if (rings.length) {
+    tl.from(
+      rings,
+      {
+        autoAlpha: 0,
+        scale: 0.6,
+        duration: 0.8 * durScale,
+        stagger: 0.08,
+      },
+      0.2 * durScale
+    );
+  }
+
+  icons.forEach((icon, i) => {
+    tl.from(
+      icon,
+      {
+        x: () => parseFloat(icon.style.getPropertyValue("--from-x")) || 0,
+        y: () => parseFloat(icon.style.getPropertyValue("--from-y")) || 0,
+        scale: 0.35,
+        autoAlpha: 0,
+        duration: 0.9 * durScale,
+        ease: iconEase,
+        onComplete: () => icon.classList.add("is-floating"),
+      },
+      0.35 * durScale + i * 0.07
+    );
   });
+
+  // from() has applied start states — safe to drop the CSS pending cloak
+  finishPending();
+
+  if (copy) {
+    gsap.from(copy, { y: 20, opacity: 0, duration: 0.8, delay: 0.15, ease: "power3.out" });
+  }
+
+  initHeroFloatObserver(hero, icons);
+}
+
+function initFloatLoops() {
+  /* Float loops start from the hero intro onComplete */
 }
 
 function initStatement(gsap) {
@@ -120,62 +203,41 @@ function initProof(gsap) {
   });
 }
 
-function initFeatureCarousel() {
-  const wrap = document.querySelector("[data-feature-carousel]");
-  if (!wrap) return;
-  const copies = [...wrap.querySelectorAll("[data-slide-copy]")];
-  const pagers = [...wrap.querySelectorAll("[data-pager]")];
-
-  const setSlide = (index) => {
-    copies.forEach((el, i) => el.classList.toggle("is-active", i === index));
-    pagers.forEach((btn, i) => btn.setAttribute("aria-current", String(i === index)));
-  };
-
-  pagers.forEach((btn) => {
-    btn.addEventListener("click", () => setSlide(Number(btn.dataset.pager)));
-  });
-
-  if (reducedMotion || window.matchMedia("(max-width: 809px)").matches) {
-    setSlide(0);
-    return;
-  }
-
-  ScrollTrigger.create({
-    trigger: wrap,
-    start: "top top",
-    end: "bottom bottom",
-    scrub: 1,
-    onUpdate: (self) => {
-      const idx = Math.min(copies.length - 1, Math.floor(self.progress * copies.length));
-      setSlide(idx);
-    },
-  });
-}
-
 function initTestimonials(gsap) {
   const section = document.querySelector("#testimonials");
   const cards = gsap.utils.toArray("[data-testimonial-card]");
   if (!section || !cards.length) return;
 
-  if (reducedMotion || window.matchMedia("(max-width: 809px)").matches) {
-    gsap.set(cards, { clearProps: "all" });
-    return;
-  }
+  const mm = gsap.matchMedia();
 
-  gsap.set(cards, { opacity: 0, scale: 0.85 });
+  mm.add("(min-width: 1024px) and (prefers-reduced-motion: no-preference)", () => {
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: section,
+        start: "top top",
+        end: "bottom bottom",
+        scrub: 1,
+        invalidateOnRefresh: true,
+      },
+    });
 
-  ScrollTrigger.create({
-    trigger: section,
-    start: "top top",
-    end: "bottom bottom",
-    scrub: 1,
-    onUpdate: (self) => {
-      cards.forEach((card, i) => {
-        const start = i / cards.length;
-        const local = gsap.utils.clamp(0, 1, (self.progress - start) / (1 / cards.length));
-        gsap.set(card, { opacity: local, scale: 0.85 + 0.15 * local });
-      });
-    },
+    cards.forEach((card, i) => {
+      const r = parseFloat(getComputedStyle(card).getPropertyValue("--r")) || 0;
+      const fromLeft = card.classList.contains("t-pos-1") || card.classList.contains("t-pos-2");
+
+      tl.fromTo(
+        card,
+        { autoAlpha: 0, scale: 0.82, x: fromLeft ? -64 : 64, y: 40, rotation: r },
+        { autoAlpha: 1, scale: 1, x: 0, y: 0, rotation: r, duration: 1, ease: "none" },
+        i
+      );
+    });
+
+    return () => {
+      tl.scrollTrigger?.kill();
+      tl.kill();
+      gsap.set(cards, { clearProps: "opacity,visibility,transform" });
+    };
   });
 }
 
@@ -247,11 +309,14 @@ ready(async () => {
   gsap.registerPlugin(ScrollTrigger);
 
   initHero(gsap);
-  initFloatLoops(gsap);
+  initFloatLoops();
   initStatement(gsap);
   initProof(gsap);
-  initFeatureCarousel();
   initTestimonials(gsap);
   initReveals(gsap);
   initFooter(gsap);
+
+  // Recalculate after late layout (fonts, async map SVG, images)
+  window.addEventListener("load", () => ScrollTrigger.refresh(), { once: true });
+  requestAnimationFrame(() => ScrollTrigger.refresh());
 });

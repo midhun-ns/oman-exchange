@@ -24,6 +24,13 @@
   --white-20: #ffffff33;
   --white-05: #ffffff0d;
 
+  /* Shared LuLu hero blue (also used by testimonials panel) */
+  --hero-bg:
+    radial-gradient(60% 55% at 50% 38%, rgba(0, 161, 237, 0.28) 0%, rgba(0, 161, 237, 0) 70%),
+    radial-gradient(40% 50% at 12% 20%, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0) 70%),
+    radial-gradient(45% 60% at 92% 85%, rgba(98, 98, 254, 0.22) 0%, rgba(98, 98, 254, 0) 70%),
+    linear-gradient(90deg, #063a6b 0%, #116bb9 100%);
+
   /* Brand violet */
   --violet-900: #28119c;
   --violet-800: #381ac9;
@@ -71,7 +78,6 @@
   --r-card-sm: 24px;
   --r-card: 40px;
   --r-card-lg: 48px;
-  --r-price: 56px;
   --r-panel: 60px;
 
   --radius-chip: var(--r-chip);

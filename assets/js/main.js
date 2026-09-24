@@ -1,6 +1,6 @@
 /**
  * LuLu Exchange Oman — main behaviours
- * Nav, accordion, rate toggle, converter, modal
+ * Nav, accordion, converter, modal
  */
 
 const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -39,6 +39,245 @@ function formatRate(value) {
   }).format(value);
 }
 
+function parseAmount(value) {
+  const n = Number.parseFloat(String(value ?? "").replace(/,/g, "").trim());
+  if (!Number.isFinite(n) || n < 0) return 0;
+  return n;
+}
+
+function formatAmount(value, maxDigits = 2) {
+  if (!Number.isFinite(value)) return "0";
+  return new Intl.NumberFormat("en-US", {
+    minimumFractionDigits: 0,
+    maximumFractionDigits: maxDigits,
+  }).format(value);
+}
+
+/* —— Hero glass converter —— */
+
+async function initHeroConverter() {
+  const root = qs("[data-hero-converter]");
+  if (!root) return;
+
+  const fromAmount = qs("[data-hero-from-amount]", root);
+  const toAmount = qs("[data-hero-to-amount]", root);
+  const fromFlag = qs("[data-hero-from-flag]", root);
+  const toFlag = qs("[data-hero-to-flag]", root);
+  const fromCodeEl = qs("[data-fx-from-code]", root);
+  const toCodeEl = qs("[data-fx-to-code]", root);
+  const rateFromEl = qs("[data-fx-rate-from]", root);
+  const rateStrong = qs("[data-hero-fx-rate-strong]", root);
+  const status = qs("[data-hero-fx-status]", root);
+  const errorEl = qs("[data-hero-fx-error]", root);
+  const swapBtn = qs("[data-hero-swap]", root);
+  const tip = qs("#fx-tip", root);
+  const fromBtn = qs("[data-fx-from-btn]", root);
+  const toBtn = qs("[data-fx-to-btn]", root);
+  const fromMenu = qs("[data-fx-from-menu]", root);
+  const toMenu = qs("[data-fx-to-menu]", root);
+
+  if (!fromAmount || !toAmount || !fromBtn || !toBtn || !fromMenu || !toMenu) return;
+
+  const setStatus = (loading, message = "") => {
+    root.classList.toggle("is-loading", loading);
+    if (status) {
+      status.hidden = !loading;
+      if (loading) status.textContent = message || "Loading rates…";
+    }
+  };
+
+  const setError = (msg) => {
+    if (!errorEl) return;
+    errorEl.hidden = !msg;
+    errorEl.textContent = msg || "";
+  };
+
+  setStatus(true);
+
+  let data;
+  try {
+    data = await getRates();
+  } catch (err) {
+    console.error(err);
+    setStatus(false);
+    setError("Unable to load rates. Please try again later.");
+    return;
+  }
+
+  setStatus(false);
+  setError("");
+  if (tip && data.disclaimer) tip.textContent = data.disclaimer;
+
+  const baseCode = data.base?.code || "OMR";
+  const baseFlag = data.base?.flag || "omr.svg";
+  const currencies = [
+    { code: baseCode, name: "Omani Rial", rate: 1, flag: baseFlag },
+    ...(data.transfer || []),
+  ];
+  const ratesMap = Object.fromEntries(currencies.map((c) => [c.code, Number(c.rate)]));
+  const flagMap = Object.fromEntries(currencies.map((c) => [c.code, c.flag]));
+
+  let fromCode = baseCode;
+  let toCode = "INR";
+  let editing = "from";
+
+  const decimalsFor = (code) => (code === "OMR" ? 3 : 2);
+
+  const toOmr = (amount, code) => {
+    if (code === baseCode) return amount;
+    const rate = ratesMap[code];
+    return rate ? amount / rate : NaN;
+  };
+
+  const fromOmr = (amountOmr, code) => {
+    if (code === baseCode) return amountOmr;
+    const rate = ratesMap[code];
+    return rate ? amountOmr * rate : NaN;
+  };
+
+  const convert = (amount, from, to) => fromOmr(toOmr(amount, from), to);
+
+  const syncCcy = (code, flagEl, codeEl) => {
+    if (flagEl) flagEl.src = `/assets/img/flags/${flagMap[code] || "omr.svg"}`;
+    if (codeEl) codeEl.textContent = code;
+  };
+
+  const closeMenus = () => {
+    fromMenu.hidden = true;
+    toMenu.hidden = true;
+    fromBtn.setAttribute("aria-expanded", "false");
+    toBtn.setAttribute("aria-expanded", "false");
+  };
+
+  const fillMenu = (menu, selected) => {
+    menu.innerHTML = currencies
+      .map(
+        (c) => `
+      <li role="none">
+        <button type="button" class="fx__option" role="option" data-code="${c.code}" aria-selected="${c.code === selected}">
+          <img src="/assets/img/flags/${c.flag}" alt="" width="22" height="22" />
+          <span>${c.code}</span>
+          <span style="margin-inline-start:auto;opacity:.55;font-size:12px;">${c.name}</span>
+        </button>
+      </li>`
+      )
+      .join("");
+  };
+
+  const bindMenu = (btn, menu, getCode, setCode) => {
+    btn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const open = menu.hidden;
+      closeMenus();
+      if (open) {
+        fillMenu(menu, getCode());
+        menu.hidden = false;
+        btn.setAttribute("aria-expanded", "true");
+      }
+    });
+
+    menu.addEventListener("click", (e) => {
+      const opt = e.target.closest("[data-code]");
+      if (!opt) return;
+      setCode(opt.dataset.code);
+      closeMenus();
+      update(editing);
+    });
+  };
+
+  bindMenu(fromBtn, fromMenu, () => fromCode, (code) => {
+    fromCode = code;
+  });
+  bindMenu(toBtn, toMenu, () => toCode, (code) => {
+    toCode = code;
+  });
+
+  document.addEventListener("click", (e) => {
+    if (!root.contains(e.target)) closeMenus();
+  });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeMenus();
+  });
+
+  const update = (source = editing) => {
+    syncCcy(fromCode, fromFlag, fromCodeEl);
+    syncCcy(toCode, toFlag, toCodeEl);
+    if (rateFromEl) rateFromEl.textContent = fromCode;
+
+    fromAmount.setAttribute("aria-label", `Amount to send in ${fromCode}`);
+    toAmount.setAttribute("aria-label", `Amount received in ${toCode}`);
+
+    if (fromCode === toCode) {
+      setError("Choose two different currencies.");
+      toAmount.value = formatAmount(parseAmount(fromAmount.value), decimalsFor(toCode));
+      if (rateStrong) rateStrong.textContent = `1 ${toCode}`;
+      return;
+    }
+    setError("");
+
+    if (source === "from") {
+      const amount = parseAmount(fromAmount.value);
+      const result = convert(amount, fromCode, toCode);
+      toAmount.value = Number.isFinite(result)
+        ? formatAmount(result, decimalsFor(toCode))
+        : "—";
+    } else {
+      const amount = parseAmount(toAmount.value);
+      const result = convert(amount, toCode, fromCode);
+      fromAmount.value = Number.isFinite(result)
+        ? formatAmount(result, decimalsFor(fromCode))
+        : "—";
+    }
+
+    const unit = convert(1, fromCode, toCode);
+    if (rateStrong) {
+      rateStrong.textContent = Number.isFinite(unit)
+        ? `${formatRate(unit)} ${toCode}`
+        : "—";
+    }
+  };
+
+  const sanitizeInput = (input) => {
+    const cleaned = input.value.replace(/[^\d.]/g, "");
+    if (cleaned !== input.value) input.value = cleaned;
+  };
+
+  fromAmount.addEventListener("input", () => {
+    editing = "from";
+    sanitizeInput(fromAmount);
+    update("from");
+  });
+  fromAmount.addEventListener("blur", () => {
+    fromAmount.value = formatAmount(parseAmount(fromAmount.value), decimalsFor(fromCode));
+  });
+
+  toAmount.addEventListener("input", () => {
+    editing = "to";
+    sanitizeInput(toAmount);
+    update("to");
+  });
+  toAmount.addEventListener("blur", () => {
+    toAmount.value = formatAmount(parseAmount(toAmount.value), decimalsFor(toCode));
+  });
+
+  swapBtn?.addEventListener("click", () => {
+    swapBtn.classList.toggle("is-swapped");
+    const prevFrom = fromCode;
+    const prevTo = toCode;
+    const prevFromAmt = fromAmount.value;
+    const prevToAmt = toAmount.value;
+    fromCode = prevTo;
+    toCode = prevFrom;
+    fromAmount.value = prevToAmt;
+    toAmount.value = prevFromAmt;
+    editing = "from";
+    update("from");
+  });
+
+  fromAmount.value = "1,000";
+  update("from");
+}
+
 /* —— Nav —— */
 
 const SITE = "https://luluexchange.com.om";
@@ -68,7 +307,7 @@ const NAV_ITEMS = [
     id: "services",
     label: "Services",
     type: "mega",
-    section: "#features",
+    section: "#benefits",
     children: [
       {
         title: "Money Transfer",
@@ -131,8 +370,6 @@ const NAV_ITEMS = [
 
 const SECTION_TO_NAV = {
   "#benefits": "services",
-  "#features": "services",
-  "#rates": "services",
   "#news": "news",
   "#faq": "contact",
 };
@@ -660,38 +897,26 @@ function initVideoModal() {
   const closer = qs("[data-modal-close]");
   if (!modal || !dialog || !frame) return;
 
-  // TODO: replace with official YouTube testimonial URL from client
-  const VIDEO_SRC = "";
-  let pendingNote = null;
+  const VIDEO_SRC = "https://www.youtube-nocookie.com/embed/ZkC4ffPqOvw";
+  let lastOpener = null;
 
-  const open = () => {
+  const open = (opener) => {
+    lastOpener = opener || null;
     modal.hidden = false;
     document.body.style.overflow = "hidden";
-    if (VIDEO_SRC) {
-      frame.hidden = false;
-      frame.src = `${VIDEO_SRC}${VIDEO_SRC.includes("?") ? "&" : "?"}autoplay=1`;
-      pendingNote?.remove();
-      pendingNote = null;
-    } else {
-      frame.hidden = true;
-      frame.removeAttribute("src");
-      if (!pendingNote) {
-        pendingNote = document.createElement("p");
-        pendingNote.className = "rates-disclaimer";
-        pendingNote.style.cssText = "padding:48px 24px;text-align:center;color:#fff;";
-        pendingNote.textContent = "Testimonial video URL pending client confirmation.";
-        dialog.appendChild(pendingNote);
-      }
-    }
+    frame.hidden = false;
+    frame.src = `${VIDEO_SRC}?autoplay=1`;
+    closer?.focus();
   };
 
   const close = () => {
     modal.hidden = true;
     frame.src = "";
     document.body.style.overflow = "";
+    lastOpener?.focus();
   };
 
-  openers.forEach((el) => el.addEventListener("click", open));
+  openers.forEach((el) => el.addEventListener("click", () => open(el)));
   closer?.addEventListener("click", close);
   modal.addEventListener("click", (e) => {
     if (e.target === modal) close();
@@ -699,6 +924,43 @@ function initVideoModal() {
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape" && !modal.hidden) close();
   });
+}
+
+function initTestimonialsCarousel() {
+  const track = qs("[data-t-track]");
+  const dotsRoot = qs("[data-t-dots]");
+  if (!track || !dotsRoot) return;
+
+  const cards = qsa("[data-testimonial-card]", track);
+  if (!cards.length) return;
+
+  dotsRoot.innerHTML = cards
+    .map((_, i) => `<button type="button" aria-label="Go to card ${i + 1}"></button>`)
+    .join("");
+  const dots = qsa("button", dotsRoot);
+
+  const sync = () => {
+    const left = track.scrollLeft;
+    let active = 0;
+    let best = Infinity;
+    cards.forEach((card, i) => {
+      const dist = Math.abs(card.offsetLeft - left);
+      if (dist < best) {
+        best = dist;
+        active = i;
+      }
+    });
+    dots.forEach((d, i) => d.classList.toggle("is-active", i === active));
+  };
+
+  dots.forEach((dot, i) => {
+    dot.addEventListener("click", () => {
+      cards[i]?.scrollIntoView({ behavior: "smooth", inline: "start", block: "nearest" });
+    });
+  });
+
+  track.addEventListener("scroll", sync, { passive: true });
+  sync();
 }
 
 /* —— Reveal fallback (if GSAP absent) —— */
@@ -724,156 +986,31 @@ function initReveal() {
   items.forEach((el) => io.observe(el));
 }
 
-/* —— Rates + converter —— */
-
-const WAYS_TO_SEND = [
-  "LuLu Now instant credit",
-  "Direct to account",
-  "Cash pick-up",
-  "LuLu Money app",
-];
-
-function pickTransferCards(list) {
-  const order = ["INR", "PHP", "BDT"];
-  return order
-    .map((code) => list.find((item) => item.code === code))
-    .filter(Boolean)
-    .map((item, i) => ({ ...item, featured: i === 0 || item.featured }));
-}
+/* —— Live rate snippets (benefits + disclaimers) —— */
 
 async function initRates() {
-  const rateRoots = qsa("[data-rates]");
-  const converters = qsa("[data-converter]");
-  const heroRate = qs("[data-hero-rate]");
   const benefitRate = qs("[data-benefit-rate]");
-  if (!rateRoots.length && !converters.length && !heroRate) return;
+  const disclaimers = qsa("[data-rates-disclaimer]");
+  if (!benefitRate && !disclaimers.length) return;
 
   let data;
   try {
     data = await getRates();
   } catch (err) {
     console.error(err);
-    rateRoots.forEach((root) => {
-      const grid = qs("[data-rates-grid]", root);
-      if (grid) grid.innerHTML = `<p class="rates-disclaimer">Unable to load rates. Please try again later.</p>`;
-    });
     return;
   }
 
-  qsa("[data-rates-disclaimer]").forEach((el) => {
-    el.textContent = data.disclaimer;
-  });
+  if (data.disclaimer) {
+    disclaimers.forEach((el) => {
+      el.textContent = data.disclaimer;
+    });
+  }
 
   const inr = getRate(data, "INR");
-  if (inr && heroRate) {
-    heroRate.textContent = `1.00 OMR = ${formatRate(inr.rate)} INR`;
-  }
   if (inr && benefitRate) {
     benefitRate.textContent = `OMR 1 = INR ${formatRate(inr.rate)}`;
   }
-
-  const renderCards = (root, mode) => {
-    const grid = qs("[data-rates-grid]", root);
-    if (!grid) return;
-
-    if (mode === "exchange") {
-      const list = data.exchange.filter((item) => ["INR", "PHP", "BDT"].includes(item.code));
-      grid.innerHTML = list
-        .map((item, i) => {
-          const featured = i === 0 ? " price-card--featured" : "";
-          return `
-            <article class="price-card${featured}">
-              <div class="price-card__top">
-                <p class="price-card__name">1 OMR → ${item.code}</p>
-                <span class="tag-pill">${item.name}</span>
-              </div>
-              <p class="price-card__value">${formatRate(item.sell)}</p>
-              <p class="price-card__unit">Sell rate · Buy ${formatRate(item.buy)}</p>
-              <p class="price-card__desc">Walk-in currency exchange at any LuLu Exchange branch.</p>
-              <ul class="price-card__list">
-                <li>Best market rates</li>
-                <li>Secure &amp; warranted</li>
-                <li>Import &amp; export desk</li>
-                <li>46 branches in Oman</li>
-              </ul>
-              <a class="btn btn--block" href="https://luluexchange.com.om/branch-locator/" target="_blank" rel="noopener">Find nearest branch</a>
-            </article>
-          `;
-        })
-        .join("");
-      return;
-    }
-
-    const list = pickTransferCards(data.transfer);
-    grid.innerHTML = list
-      .map((item) => {
-        const featured = item.featured ? " price-card--featured" : "";
-        return `
-          <article class="price-card${featured}">
-            <div class="price-card__top">
-              <p class="price-card__name">1 OMR → ${item.code}</p>
-              <span class="tag-pill">${item.name}</span>
-            </div>
-            <p class="price-card__value">${formatRate(item.rate)}</p>
-            <p class="price-card__unit">Indicative transfer rate</p>
-            <p class="price-card__desc">Send via LuLu Now, direct to account, or cash pick-up.</p>
-            <p style="margin:0 0 8px;font-size:13px;font-weight:600;color:var(--grey-600);">Ways to send</p>
-            <ul class="price-card__list">
-              ${WAYS_TO_SEND.map((line) => `<li>${line}</li>`).join("")}
-            </ul>
-            <a class="btn btn--block" href="https://luluexchange.com.om/branch-locator/" target="_blank" rel="noopener">Find nearest branch</a>
-          </article>
-        `;
-      })
-      .join("");
-  };
-
-  rateRoots.forEach((root) => {
-    let mode = root.getAttribute("data-rates-mode") || "transfer";
-    renderCards(root, mode);
-
-    qsa("[data-rate-toggle]", root).forEach((btn) => {
-      btn.addEventListener("click", () => {
-        mode = btn.getAttribute("data-rate-toggle");
-        qsa("[data-rate-toggle]", root).forEach((b) =>
-          b.setAttribute("aria-pressed", String(b === btn))
-        );
-        renderCards(root, mode);
-      });
-    });
-  });
-
-  converters.forEach((root) => {
-    const amountInput = qs("[data-converter-amount]", root);
-    const toSelect = qs("[data-converter-to]", root);
-    const resultEl = qs("[data-converter-result]", root);
-    const mini = qs("[data-mini-rates]", root);
-    if (!amountInput || !toSelect || !resultEl) return;
-
-    toSelect.innerHTML = data.transfer
-      .map((c) => `<option value="${c.code}" data-rate="${c.rate}">${c.code} — ${c.name}</option>`)
-      .join("");
-
-    const usd = getRate(data, "USD");
-    const aed = getRate(data, "AED");
-    if (mini) {
-      mini.innerHTML = [
-        usd ? `<span>USD · ${formatRate(usd.rate)}</span>` : "",
-        aed ? `<span>AED · ${formatRate(aed.rate)}</span>` : "",
-      ].join("");
-    }
-
-    const update = () => {
-      const amount = Number.parseFloat(String(amountInput.value).replace(/,/g, "")) || 0;
-      const opt = toSelect.selectedOptions[0];
-      const rate = Number(opt?.dataset.rate || 0);
-      resultEl.textContent = `${formatRate(amount * rate)} ${opt?.value || ""}`;
-    };
-
-    amountInput.addEventListener("input", update);
-    toSelect.addEventListener("change", update);
-    update();
-  });
 }
 
 function initBackToTop() {
@@ -1050,6 +1187,7 @@ async function initPresenceMap() {
     const res = await fetch("/assets/img/oman-branch-map.svg", { cache: "force-cache" });
     if (!res.ok) throw new Error(`Map SVG ${res.status}`);
     host.innerHTML = await res.text();
+    window.ScrollTrigger?.refresh();
   } catch (err) {
     console.error(err);
     return;
@@ -1138,9 +1276,11 @@ document.addEventListener("DOMContentLoaded", () => {
   initAccordions();
   initVideoModal();
   initReveal();
+  initHeroConverter();
   initRates();
   initBackToTop();
   initRateStrip();
   initCtaPhone();
   initPresenceMap();
+  initTestimonialsCarousel();
 });

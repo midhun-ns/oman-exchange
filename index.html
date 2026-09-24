@@ -66,38 +66,130 @@
 
   <main id="main">
     <!-- 5.1 Hero -->
-    <section id="hero" aria-labelledby="hero-title">
-      <div class="hero__stage">
-        <article class="hero__float hero__float--rate" data-float-card>
-          <p class="hero__float-label">Today's rate</p>
-          <p class="hero__float-value"><span data-hero-rate>1.00 OMR = 248.55 INR</span></p>
-          <p class="rates-disclaimer" style="margin:8px 0 0;text-align:start;font-size:11px;" data-rates-disclaimer>Rates are indicative and subject to change.</p>
-        </article>
-
-        <div class="hero__phone-wrap" data-hero-phone>
-          <span class="hero__notch">SEND SMART. LIVE SMART.</span>
-          <!-- TODO: replace with official LuLu Money app screenshot from client -->
-          <img class="hero__phone" src="/assets/img/phone-mockup.svg" alt="LuLu Money app on a phone" width="280" height="560" />
+    <section id="hero" class="hero--intro-pending" data-nav-theme="dark" aria-labelledby="hero-title">
+      <div class="hero__visual" data-hero-visual>
+        <div class="hero__orbits" aria-hidden="true">
+          <span class="hero__orbit-ring"></span>
+          <span class="hero__orbit-ring"></span>
+          <span class="hero__orbit-ring"></span>
         </div>
 
-        <article class="hero__float hero__float--branch" data-float-card>
-          <p class="hero__float-label">Nationwide</p>
-          <p class="hero__float-value">46 Branches across Oman</p>
-          <div class="hero__float-bars" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
-        </article>
+        <div class="hero-float hero-float--om" data-hero-float style="--float-dur:6.5s; --float-delay:0s">
+          <div class="hero-float__float">
+            <img src="/assets/img/hero/flag-om.webp" alt="" width="96" height="96" loading="eager" style="--tilt:-12deg" />
+          </div>
+        </div>
+        <div class="hero-float hero-float--in" data-hero-float style="--float-dur:7.2s; --float-delay:0.6s">
+          <div class="hero-float__float">
+            <img src="/assets/img/hero/flag-in.webp" alt="" width="88" height="88" loading="eager" style="--tilt:14deg" />
+          </div>
+        </div>
+        <div class="hero-float hero-float--swap" data-hero-float style="--float-dur:5.8s; --float-delay:1.1s">
+          <div class="hero-float__float">
+            <img src="/assets/img/hero/icon-swap.webp" alt="" width="78" height="78" loading="eager" style="--tilt:-8deg" />
+          </div>
+        </div>
+        <div class="hero-float hero-float--coins" data-hero-float style="--float-dur:7.8s; --float-delay:0.3s">
+          <div class="hero-float__float">
+            <img src="/assets/img/hero/icon-coins.webp" alt="" width="100" height="100" loading="eager" style="--tilt:8deg" />
+          </div>
+        </div>
+        <div class="hero-float hero-float--send" data-hero-float style="--float-dur:6.2s; --float-delay:1.4s">
+          <div class="hero-float__float">
+            <img src="/assets/img/hero/icon-send.webp" alt="" width="72" height="72" loading="eager" style="--tilt:10deg" />
+          </div>
+        </div>
+        <div class="hero-float hero-float--analytics" data-hero-float style="--float-dur:8s; --float-delay:0.9s">
+          <div class="hero-float__float">
+            <img src="/assets/img/hero/icon-analytics.webp" alt="" width="80" height="80" loading="eager" style="--tilt:-6deg" />
+          </div>
+        </div>
+
+        <div class="fx" data-hero-converter role="group" aria-labelledby="fx-title">
+          <p class="fx__status" data-hero-fx-status hidden>Loading rates…</p>
+
+          <div class="fx__head">
+            <span id="fx-title" class="fx__title">Currency converter</span>
+            <span class="fx__chip"><span class="fx__dot" aria-hidden="true"></span>Today's rate</span>
+          </div>
+
+          <div class="fx__row">
+            <label class="fx__label" for="fx-send">You send</label>
+            <div class="fx__line">
+              <div class="fx__ccy-wrap">
+                <button type="button" class="fx__ccy" data-fx-from-btn aria-haspopup="listbox" aria-expanded="false" aria-label="From currency">
+                  <img data-hero-from-flag src="/assets/img/flags/omr.svg" alt="" width="24" height="24" />
+                  <span data-fx-from-code>OMR</span>
+                  <svg class="fx__chev" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
+                <ul class="fx__menu" data-fx-from-menu role="listbox" hidden></ul>
+              </div>
+              <input
+                id="fx-send"
+                class="fx__amount"
+                type="text"
+                inputmode="decimal"
+                autocomplete="off"
+                value="1,000"
+                data-hero-from-amount
+                aria-label="Amount to send"
+              />
+            </div>
+          </div>
+
+          <button class="fx__swap" type="button" data-hero-swap aria-label="Swap currencies">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="m3 16 4 4 4-4"/><path d="M7 20V4"/><path d="m21 8-4-4-4 4"/><path d="M17 4v16"/>
+            </svg>
+          </button>
+
+          <div class="fx__row">
+            <label class="fx__label" for="fx-recv">They receive</label>
+            <div class="fx__line">
+              <div class="fx__ccy-wrap">
+                <button type="button" class="fx__ccy" data-fx-to-btn aria-haspopup="listbox" aria-expanded="false" aria-label="To currency">
+                  <img data-hero-to-flag src="/assets/img/flags/inr.svg" alt="" width="24" height="24" />
+                  <span data-fx-to-code>INR</span>
+                  <svg class="fx__chev" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
+                <ul class="fx__menu" data-fx-to-menu role="listbox" hidden></ul>
+              </div>
+              <input
+                id="fx-recv"
+                class="fx__amount fx__amount--recv"
+                type="text"
+                inputmode="decimal"
+                autocomplete="off"
+                value="248,550"
+                data-hero-to-amount
+                aria-label="Amount received"
+              />
+            </div>
+          </div>
+
+          <div class="fx__foot">
+            <span class="fx__rate">1 <span data-fx-rate-from>OMR</span> = <strong data-hero-fx-rate-strong>248.55 INR</strong></span>
+            <span class="fx__note" tabindex="0" aria-describedby="fx-tip">
+              Indicative
+              <svg class="fx__info" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+              <span id="fx-tip" role="tooltip" class="fx__tip">Rates are indicative and subject to change. Contact our nearest branch for the latest rates.</span>
+            </span>
+          </div>
+          <p class="fx__error" data-hero-fx-error hidden></p>
+        </div>
       </div>
 
       <div class="hero__copy">
-        <h1 id="hero-title">
-          <span class="line-violet">Send smart.</span>
-          <span class="line-ink">Live smart.</span>
+        <p class="hero__eyebrow">Global money transfers</p>
+        <h1 id="hero-title" class="hero__title">
+          <span class="hero__title-line">We value your</span>
+          <span class="hero__title-line hero__title-line--accent">hard-earned money.</span>
         </h1>
-        <p class="hero__lead">Transfer money to 140+ countries easily and securely. Visit your nearest LuLu Exchange branch or send from the LuLu Money app.</p>
+        <p class="hero__lead">Transfer your money at the best exchange rates. Visit the nearest LuLu Exchange branch today.</p>
         <div class="hero__actions">
           <span class="btn-ring">
-            <a class="btn btn--of-primary" href="#cta">Download LuLu Money</a>
+            <a class="btn btn--of-primary" href="https://luluexchange.com.om/branch-locator/" target="_blank" rel="noopener">Locate now →</a>
           </span>
-          <a class="btn btn--of-secondary" href="https://luluexchange.com.om/branch-locator/" target="_blank" rel="noopener">Locate a branch</a>
         </div>
       </div>
     </section>
@@ -129,42 +221,137 @@
         </div>
       </aside>
       <div class="section-head reveal">
-        <span class="chip"><span class="chip__num">01</span>benefits</span>
-        <h2 id="benefits-title">We value your hard-earned money.</h2>
-        <p class="section-head__lead">Transfer your money at the best exchange rates, across the globe, with instant and hassle-free services.</p>
+        <span class="chip"><span class="chip__num">01</span>services</span>
+        <h2 id="benefits-title">Simplifying money. Simplifying life.</h2>
+        <p class="section-head__lead">Trusted currency exchange &amp; money transfer services. Make easy and secure transactions across the globe with our instant and hassle-free services.</p>
       </div>
       <div class="benefits__grid">
-        <article class="benefit-card reveal">
-          <div class="benefit-card__illu" aria-hidden="true"><div class="flag-wheel"></div></div>
-          <h3>Best market rates</h3>
-        </article>
-        <article class="benefit-card reveal">
-          <div class="benefit-card__illu" aria-hidden="true">
-            <div class="avatar-stack">
-              <div class="avatar-stack__face"></div>
-              <div class="avatar-stack__apps"><span>📱</span><span>💱</span></div>
+        <a
+          class="benefit-card reveal"
+          href="https://luluexchange.com.om/services/currency-exchange/"
+          target="_blank"
+          rel="noopener"
+        >
+          <div class="benefit-card__visual" aria-hidden="true">
+            <div class="svc-fx">
+              <div class="svc-fx__chip svc-fx__chip--a">
+                <img src="/assets/img/flags/omr.svg" alt="" width="22" height="22" />
+                <span>OMR</span>
+              </div>
+              <div class="svc-fx__swap">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3 4 7l4 4"/><path d="M4 7h16"/><path d="m16 21 4-4-4-4"/><path d="M20 17H4"/></svg>
+              </div>
+              <div class="svc-fx__chip svc-fx__chip--b">
+                <img src="/assets/img/flags/inr.svg" alt="" width="22" height="22" />
+                <span>INR</span>
+              </div>
             </div>
           </div>
-          <h3>Send to 140+ countries</h3>
-        </article>
-        <article class="benefit-card benefit-card--photo reveal">
-          <div class="benefit-card__overlay">
+          <div class="benefit-card__body">
+            <h3 class="benefit-card__title">Currency Exchange</h3>
+            <p class="benefit-card__text">Buy and exchange currency securely, at the best market rates.</p>
+            <span class="benefit-card__link">Learn more <span aria-hidden="true">→</span></span>
+          </div>
+        </a>
+
+        <a
+          class="benefit-card reveal"
+          href="https://luluexchange.com.om/services/import-and-export/"
+          target="_blank"
+          rel="noopener"
+        >
+          <div class="benefit-card__visual" aria-hidden="true">
+            <div class="svc-notes">
+              <span class="svc-notes__pill">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M10 18v-7"/><path d="M14 18v-7"/><path d="M3 22h18"/><path d="M5 18h14"/><path d="m12 2 9 5H3Z"/></svg>
+                Bank Notes team
+              </span>
+              <div class="svc-notes__stack">
+                <div class="svc-notes__note svc-notes__note--1">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="12" x="2" y="6" rx="2"/><circle cx="12" cy="12" r="2"/><path d="M6 12h.01M18 12h.01"/></svg>
+                  <span class="svc-notes__line"></span>
+                </div>
+                <div class="svc-notes__note svc-notes__note--2">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="12" x="2" y="6" rx="2"/><circle cx="12" cy="12" r="2"/><path d="M6 12h.01M18 12h.01"/></svg>
+                  <span class="svc-notes__line"></span>
+                </div>
+                <div class="svc-notes__note svc-notes__note--3">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="12" x="2" y="6" rx="2"/><circle cx="12" cy="12" r="2"/><path d="M6 12h.01M18 12h.01"/></svg>
+                  <span class="svc-notes__line"></span>
+                </div>
+              </div>
+              <span class="svc-notes__tile svc-notes__tile--down">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 17V3"/><path d="m6 11 6 6 6-6"/><path d="M19 21H5"/></svg>
+              </span>
+              <span class="svc-notes__tile svc-notes__tile--up">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m18 9-6-6-6 6"/><path d="M12 3v14"/><path d="M5 21h14"/></svg>
+              </span>
+            </div>
+          </div>
+          <div class="benefit-card__body">
+            <h3 class="benefit-card__title">Import &amp; Export of Currencies</h3>
+            <p class="benefit-card__text">Trade your foreign currency securely with our dedicated Bank Notes team.</p>
+            <span class="benefit-card__link">Learn more <span aria-hidden="true">→</span></span>
+          </div>
+        </a>
+
+        <a
+          class="benefit-card benefit-card--featured reveal"
+          href="https://luluexchange.com.om/services/money-transfer/"
+          target="_blank"
+          rel="noopener"
+        >
+          <div class="benefit-card__visual benefit-card__visual--featured" aria-hidden="true">
+            <span class="svc-send">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
+            </span>
+            <svg class="svc-send__arc" viewBox="0 0 160 60" fill="none" aria-hidden="true">
+              <path d="M8 48 C 48 8, 112 8, 152 48" stroke="rgba(255,255,255,.25)" stroke-width="2" stroke-dasharray="4 6" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="benefit-card__body benefit-card__body--featured">
             <p class="benefit-card__rate" data-benefit-rate>OMR 1 = INR 248.55</p>
             <p class="benefit-card__caption">Today's rate</p>
+            <h3 class="benefit-card__title">Money Transfer</h3>
+            <p class="benefit-card__text">Send your money anywhere you want, with ease and efficiency.</p>
+            <span class="benefit-card__link">Learn more <span aria-hidden="true">→</span></span>
           </div>
-        </article>
-        <article class="benefit-card reveal">
-          <div class="benefit-card__illu">
-            <div class="receipt-card">
-              <div class="receipt-card__shield" aria-hidden="true">🛡</div>
-              <strong>Transfer secured</strong>
-              <p style="margin:8px 0 0;opacity:.7;">Ref · LXO-20491</p>
+        </a>
+
+        <a
+          class="benefit-card reveal"
+          href="https://luluexchange.com.om/services/value-added-services/"
+          target="_blank"
+          rel="noopener"
+        >
+          <div class="benefit-card__visual" aria-hidden="true">
+            <div class="svc-vas">
+              <div class="svc-vas__card svc-vas__card--back">
+                <span class="svc-vas__tile">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+                </span>
+                <span>International top-up</span>
+              </div>
+              <div class="svc-vas__card svc-vas__card--front">
+                <span class="svc-vas__tile">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="20" x="5" y="2" rx="2"/><path d="M12 18h.01"/></svg>
+                </span>
+                <strong>Prepaid recharge</strong>
+                <div class="svc-vas__pills">
+                  <span>Omantel</span>
+                  <span>Ooredoo</span>
+                </div>
+              </div>
             </div>
           </div>
-          <h3>Secure every step</h3>
-        </article>
+          <div class="benefit-card__body">
+            <h3 class="benefit-card__title">Value Added Services</h3>
+            <p class="benefit-card__text">Make life simpler with our range of value added services catering to your every need.</p>
+            <span class="benefit-card__link">Learn more <span aria-hidden="true">→</span></span>
+          </div>
+        </a>
       </div>
-      <p class="rates-disclaimer" data-rates-disclaimer>Rates are indicative and subject to change.</p>
+      <p class="rates-disclaimer" data-rates-disclaimer>Rates are indicative and subject to change. Contact our nearest branch for the latest rates.</p>
     </section>
 
     <!-- 5.4 Statement -->
@@ -183,15 +370,11 @@
           <span class="word">makes</span>
           <span class="word">every</span>
           <span class="word">transfer,</span>
-          <span class="about__sticker">Exchange</span>
           <span class="word">exchange</span>
-          <span class="about__sticker about__sticker--icon" aria-hidden="true">🇮🇳</span>
           <span class="word">and</span>
           <span class="word">recharge</span>
-          <span class="about__sticker about__sticker--icon" aria-hidden="true">📱</span>
           <span class="word">simple,</span>
           <span class="word">secure</span>
-          <span class="about__sticker about__sticker--icon" aria-hidden="true">🛡</span>
           <span class="word">and</span>
           <span class="word">on</span>
           <span class="word">time.</span>
@@ -221,115 +404,6 @@
           </article>
         </div>
         <div class="proof__glow" aria-hidden="true"></div>
-      </div>
-    </section>
-
-    <!-- 5.6 Features -->
-    <section id="features" class="section--dark" data-nav-theme="dark" aria-labelledby="features-title">
-      <div class="section-head reveal">
-        <span class="chip"><span class="chip__num">02</span>key features</span>
-        <h2 id="features-title">Trusted exchange. Seamless transfers.</h2>
-        <p class="section-head__lead">Make easy and secure transactions, across the globe, with our instant and hassle-free services.</p>
-      </div>
-
-      <div class="feature-block feature-split reveal">
-        <div class="feature-split__visual" aria-hidden="true">
-          <div class="stack-cards"><span></span><span></span><span></span></div>
-        </div>
-        <div class="feature-split__panel">
-          <p class="feature-split__label">Money transfer</p>
-          <h3>Send your money anywhere you want.</h3>
-          <p>With ease and efficiency, and real-time transparency at every step.</p>
-          <ul class="feature-list">
-            <li>
-              <span class="feature-list__icon" aria-hidden="true">⚡</span>
-              <div>
-                <strong>Instant Account Credit (LuLu Now)</strong>
-                <span>Credit bank accounts in India, Philippines, Pakistan, Sri Lanka, Bangladesh, Nepal, Egypt and Indonesia.</span>
-              </div>
-            </li>
-            <li>
-              <span class="feature-list__icon" aria-hidden="true">🏦</span>
-              <div>
-                <strong>Direct to Account</strong>
-                <span>Send directly to a bank account through country-specific inter-bank networks.</span>
-              </div>
-            </li>
-            <li>
-              <span class="feature-list__icon" aria-hidden="true">💵</span>
-              <div>
-                <strong>Cash Pick Up</strong>
-                <span>Collect at 50,000+ partner locations worldwide.</span>
-              </div>
-            </li>
-            <li>
-              <span class="feature-list__icon" aria-hidden="true">📍</span>
-              <div>
-                <strong>Track every transfer</strong>
-                <span>A safe record of all your transactions in the LuLu Money app.</span>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="feature-carousel">
-        <div class="feature-carousel__head reveal">
-          <p class="feature-split__label">Currency exchange</p>
-          <h3>Exchange currency. Quickly, safely, at the best rates.</h3>
-          <p>Buy and exchange currencies from across the world with warranted practices.</p>
-        </div>
-        <div class="feature-carousel__stage-wrap" data-feature-carousel>
-          <div class="feature-carousel__sticky">
-            <div class="feature-pager" role="tablist" aria-label="Currency exchange slides">
-              <button type="button" aria-current="true" aria-label="Slide 1" data-pager="0"></button>
-              <button type="button" aria-label="Slide 2" data-pager="1"></button>
-              <button type="button" aria-label="Slide 3" data-pager="2"></button>
-            </div>
-            <div class="feature-slide-visual" data-slide-visual aria-hidden="true">
-              <strong style="font-size:28px;color:#fff;text-shadow:0 8px 24px rgba(0,0,0,.25);">OMR ↔ FX</strong>
-            </div>
-            <div class="feature-slide-copy">
-              <div data-slide-copy class="is-active">
-                <h4>Best market rates</h4>
-                <p>Buy and exchange currencies from across the world.</p>
-              </div>
-              <div data-slide-copy>
-                <h4>Import &amp; Export of Currencies</h4>
-                <p>A dedicated Bank Notes team for high-volume traders and SMEs.</p>
-              </div>
-              <div data-slide-copy>
-                <h4>Secure &amp; warranted</h4>
-                <p>Quick and secure procedures with warranted practices.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="vas reveal">
-        <h3>Make life simpler.</h3>
-        <p>A range of value added services catering to your every need.</p>
-        <div class="vas__row">
-          <article class="vas-card vas-card--side">
-            <div class="vas-card__illu" aria-hidden="true"></div>
-            <span class="vas-card__num">01</span>
-            <h4>Ding mobile recharge</h4>
-            <p>The quickest international mobile top-up.</p>
-          </article>
-          <article class="vas-card vas-card--mid">
-            <div class="vas-card__illu" aria-hidden="true"></div>
-            <span class="vas-card__num">02</span>
-            <h4>Ooredoo &amp; Omantel</h4>
-            <p>Recharge prepaid connections at any LuLu Exchange branch.</p>
-          </article>
-          <article class="vas-card vas-card--side">
-            <div class="vas-card__illu" aria-hidden="true"></div>
-            <span class="vas-card__num">03</span>
-            <h4>LuLu Money app</h4>
-            <p>Send money to 140+ countries from your phone.</p>
-          </article>
-        </div>
       </div>
     </section>
 
@@ -423,95 +497,121 @@
         <div class="testimonials__head">
           <span class="chip chip--on-dark" style="transform:rotate(-8deg);display:inline-flex;margin-bottom:1rem;"><span class="chip__num">04</span>testimonials</span>
           <h2 id="testimonials-title">Trusted by businesses, loved by families.</h2>
-          <p>See how customers across Oman send, exchange and manage money with LuLu Exchange.</p>
+          <p class="testimonials__lead">See how customers across Oman send, exchange and manage money with LuLu Exchange.</p>
           <div class="testimonials__badges">
-            <!-- TODO: client to confirm award / rating figures -->
-            <span class="rating-badge">Oman's Most Trusted Brand · 2025</span>
-            <span class="rating-badge">LuLu Money · rated on App Store &amp; Google Play</span>
+            <span class="rating-badge">Oman's Most Trusted Brand · 2024 &amp; 2025</span>
+            <span class="rating-badge">15 years in Oman</span>
           </div>
         </div>
 
-        <div class="testimonials__track">
-          <article class="testimonial-card testimonial-card--video testimonial-card--dark t-pos-1" data-testimonial-card data-video-open>
-            <img src="/assets/img/video-poster.svg" alt="" width="280" height="160" />
-            <span class="play" aria-hidden="true">▶</span>
-            <div class="body">
-              <p class="testimonial-card__quote">Watch Sulfikur Ahammed, Finance Manager at Al Mansoori Petroleum Services.</p>
-              <div class="testimonial-card__meta">
-                <strong>Sulfikur Ahammed</strong>
-              </div>
+        <div class="testimonials__track" data-t-track>
+          <button
+            type="button"
+            class="t-card t-card--dark t-pos-1"
+            style="--r:-6deg"
+            data-testimonial-card
+            data-video-open
+            aria-label="Play customer story: Sulfikur Ahammed"
+          >
+            <div class="t-card__media">
+              <img src="/assets/img/testimonials/sulfikur-video.webp" alt="Sulfikur Ahammed video testimonial thumbnail" width="560" height="320" loading="lazy" />
+              <span class="t-card__play" aria-hidden="true">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M9 7.5v9l8-4.5-8-4.5Z" fill="currentColor"/></svg>
+              </span>
             </div>
-          </article>
+            <div class="t-card__body">
+              <span class="t-card__tag">Customer story</span>
+              <h3 class="t-card__title">Powering smooth business payments</h3>
+              <p class="t-card__text">Watch how LuLu Exchange supports the day-to-day workflow of Al Mansoori Petroleum Services.</p>
+              <p class="t-card__meta">Sulfikur Ahammed · Finance Manager, Al Mansoori Petroleum Services</p>
+            </div>
+          </button>
 
-          <!-- TODO: real testimonial from client -->
-          <article class="testimonial-card testimonial-card--white t-pos-2" data-testimonial-card>
-            <div class="testimonial-card__stars" aria-hidden="true">★★★★★</div>
-            <p class="testimonial-card__quote">Customer quote pending</p>
-            <div class="testimonial-card__meta"><span>Name pending · Role pending</span></div>
-          </article>
-          <!-- TODO: real testimonial from client -->
-          <article class="testimonial-card testimonial-card--violet t-pos-3" data-testimonial-card>
-            <div class="testimonial-card__stars" aria-hidden="true">★★★★★</div>
-            <p class="testimonial-card__quote">Customer quote pending</p>
-            <div class="testimonial-card__meta"><span>Name pending · Role pending</span></div>
-          </article>
-          <!-- TODO: real testimonial from client -->
-          <article class="testimonial-card testimonial-card--blue t-pos-4" data-testimonial-card>
-            <div class="testimonial-card__stars" aria-hidden="true">★★★★★</div>
-            <p class="testimonial-card__quote">Customer quote pending</p>
-            <div class="testimonial-card__meta"><span>Name pending · Role pending</span></div>
-          </article>
-          <!-- TODO: real testimonial from client -->
-          <article class="testimonial-card testimonial-card--pink t-pos-5" data-testimonial-card>
-            <div class="testimonial-card__stars" aria-hidden="true">★★★★★</div>
-            <p class="testimonial-card__quote">Customer quote pending</p>
-            <div class="testimonial-card__meta"><span>Name pending · Role pending</span></div>
-          </article>
+          <a
+            class="t-card t-card--violet t-pos-2"
+            style="--r:4deg"
+            data-testimonial-card
+            href="https://luluexchange.com.om/blog/lulu-exchange-voted-omans-most-trusted-brand-for-the-second-consecutive-year/"
+            target="_blank"
+            rel="noopener"
+          >
+            <div class="t-card__media">
+              <img src="/assets/img/testimonials/omtb-award.webp" alt="LuLu Exchange team receiving the OMTB award" width="560" height="320" loading="lazy" />
+            </div>
+            <div class="t-card__body">
+              <span class="t-card__tag">Award</span>
+              <h3 class="t-card__title">Oman's Most Trusted Brand, two years running</h3>
+              <p class="t-card__text">Voted by consumers in the Money Exchange category at the OMTB Awards by Muscat Daily, where over 1 million votes were cast across 52 categories.</p>
+              <p class="t-card__meta">OMTB Awards 2024 · announced 17 Feb 2025</p>
+              <span class="t-card__cta">Read story →</span>
+            </div>
+          </a>
+
+          <a
+            class="t-card t-card--white t-pos-3"
+            style="--r:5deg"
+            data-testimonial-card
+            href="https://luluexchange.com.om/blog/lulu-exchange-celebrates-15-years-of-trust-and-commitment-in-oman/"
+            target="_blank"
+            rel="noopener"
+          >
+            <div class="t-card__media">
+              <img src="/assets/img/testimonials/15-years.webp" alt="LuLu Exchange celebrating 15 years in Oman" width="560" height="320" loading="lazy" />
+            </div>
+            <div class="t-card__body">
+              <span class="t-card__tag">Milestone</span>
+              <h3 class="t-card__title">15 years of trust in Oman</h3>
+              <p class="t-card__text">Celebrating 15 years of connecting families across Oman with their loved ones back home.</p>
+              <p class="t-card__meta">2 Jan 2026</p>
+              <span class="t-card__cta">Read story →</span>
+            </div>
+          </a>
+
+          <a
+            class="t-card t-card--lilac t-pos-4"
+            style="--r:-5deg"
+            data-testimonial-card
+            href="https://luluexchange.com.om/blog/joining-hands-with-champions-lulu-exchange-lulu-money-partner-with-the-argentine-football-association/"
+            target="_blank"
+            rel="noopener"
+          >
+            <div class="t-card__media">
+              <img src="/assets/img/testimonials/afa-partner.webp" alt="LuLu Exchange partnership with the Argentine Football Association" width="560" height="320" loading="lazy" />
+            </div>
+            <div class="t-card__body">
+              <span class="t-card__tag">Partnership</span>
+              <h3 class="t-card__title">Regional fintech partner of the Argentine Football Association</h3>
+              <p class="t-card__text">LuLu Exchange and LuLu Money joined the AFA as Regional Fintech Partners, through mid-2026.</p>
+              <p class="t-card__meta">22 Jul 2025</p>
+              <span class="t-card__cta">Read story →</span>
+            </div>
+          </a>
+
+          <a
+            class="t-card t-card--blue t-pos-5"
+            style="--r:3deg"
+            data-testimonial-card
+            href="https://luluexchange.com.om/blog/inspiring-future-champions-lulu-exchange-supports-youth-football-in-oman/"
+            target="_blank"
+            rel="noopener"
+          >
+            <div class="t-card__media">
+              <img src="/assets/img/testimonials/youth-football.webp" alt="Young footballers in LuLu Exchange sponsored jerseys" width="560" height="320" loading="lazy" />
+            </div>
+            <div class="t-card__body">
+              <span class="t-card__tag">Community</span>
+              <h3 class="t-card__title">Inspiring future champions</h3>
+              <p class="t-card__text">Official jerseys for young players at Al-Itifaq Sport Academy in Yitti, Muscat.</p>
+              <p class="t-card__meta">8 Jul 2025</p>
+              <span class="t-card__cta">Read story →</span>
+            </div>
+          </a>
         </div>
+        <div class="testimonials__dots" data-t-dots aria-hidden="true"></div>
       </div>
     </section>
 
-    <!-- 5.9 Rates -->
-    <section id="rates" data-rates data-rates-mode="transfer" aria-labelledby="rates-title">
-      <div class="section-head reveal">
-        <span class="chip"><span class="chip__num">05</span>rates</span>
-        <h2 id="rates-title">Today's money transfer rate.</h2>
-        <p class="section-head__lead">Rates are indicative and subject to change. Contact our nearest branch for the latest rates.</p>
-      </div>
-
-      <div class="rates-toggle-wrap">
-        <div class="rates-toggle" role="group" aria-label="Rate type">
-          <button type="button" data-rate-toggle="transfer" aria-pressed="true">Money transfer</button>
-          <button type="button" data-rate-toggle="exchange" aria-pressed="false">Currency exchange</button>
-        </div>
-      </div>
-
-      <div class="price-grid" data-rates-grid>
-        <!-- Filled by main.js -->
-      </div>
-      <p class="rates-disclaimer" data-rates-disclaimer></p>
-
-      <div class="light-card converter-card" data-converter>
-        <div class="converter-card__grid">
-          <div class="converter-field">
-            <label for="converter-amount">You send</label>
-            <input id="converter-amount" type="number" inputmode="decimal" min="0" step="0.01" value="1" data-converter-amount aria-describedby="converter-disclaimer" />
-          </div>
-          <div class="converter-field">
-            <label for="converter-to">They receive</label>
-            <select id="converter-to" data-converter-to></select>
-          </div>
-          <div class="converter-field">
-            <label for="converter-result">Converted amount</label>
-            <div id="converter-result" class="converter-result" data-converter-result>—</div>
-          </div>
-        </div>
-        <div class="mini-rates" data-mini-rates></div>
-        <p class="rates-disclaimer" id="converter-disclaimer" data-rates-disclaimer></p>
-      </div>
-    </section>
-
-    <!-- 5.10 News -->
+    <!-- 5.9 News -->
     <section id="news" aria-labelledby="news-title">
       <div class="news-head reveal">
         <h2 id="news-title">What's new.</h2>
@@ -639,7 +739,7 @@
     </section>
 
     <!-- 5.12 CTA -->
-    <section id="cta" data-nav-theme="dark" aria-labelledby="cta-title">
+    <section id="cta" aria-labelledby="cta-title">
       <h2 id="cta-title" class="visually-hidden">Download LuLu Money</h2>
       <div class="cta-app">
         <div class="cta-app__left">

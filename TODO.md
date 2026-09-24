@@ -14,9 +14,9 @@ Items below need client assets, confirmation, or legal sign-off before launch.
 - [ ] Decide when to wire `fetchLiveRates()` to a live feed
 
 ## Testimonials
-- [ ] Provide official YouTube embed URL for Sulfikur Ahammed / Al Mansoori Petroleum Services video
-- [ ] Supply 4 real customer testimonials (quote, name, role, optional photo) — placeholders currently say "Customer quote pending"
-- [ ] Confirm "Oman's Most Trusted Brand · 2025" and app-store rating badge copy/figures
+- [x] Provide official YouTube embed URL for Sulfikur Ahammed / Al Mansoori Petroleum Services video (`ZkC4ffPqOvw`)
+- [ ] Replace/extend trust cards with client-approved customer testimonials (name, role, photo consent)
+- [x] Confirm "Oman's Most Trusted Brand · 2024 & 2025" and "15 years in Oman" badge copy
 
 ## News
 - [ ] Confirm deep links for each news card (currently point to `/news/`)
