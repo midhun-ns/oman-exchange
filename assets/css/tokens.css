@@ -1,6 +1,6 @@
 /**
- * LuLu Exchange Oman — design tokens measured from OneFin.
- * Swap --violet-800 / --brand to LuLu navy #002539 / cyan #00A1ED for a re-skin.
+ * LuLu Exchange Oman — design tokens.
+ * Brand scale matches the hero blues (#063a6b / #116bb9 / #00A1ED).
  */
 
 :root {
@@ -24,21 +24,22 @@
   --white-20: #ffffff33;
   --white-05: #ffffff0d;
 
-  /* Shared LuLu hero blue (also used by testimonials panel) */
+  /* Shared LuLu hero blue */
   --hero-bg:
     radial-gradient(60% 55% at 50% 38%, rgba(0, 161, 237, 0.28) 0%, rgba(0, 161, 237, 0) 70%),
     radial-gradient(40% 50% at 12% 20%, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0) 70%),
-    radial-gradient(45% 60% at 92% 85%, rgba(98, 98, 254, 0.22) 0%, rgba(98, 98, 254, 0) 70%),
+    radial-gradient(45% 60% at 92% 85%, rgba(17, 107, 185, 0.28) 0%, rgba(17, 107, 185, 0) 70%),
     linear-gradient(90deg, #063a6b 0%, #116bb9 100%);
 
-  /* Brand violet */
-  --violet-900: #28119c;
-  --violet-800: #381ac9;
-  --violet-500: #6262fe;
-  --violet-300: #9696ff;
-  --violet-200: #bebeff;
-  --violet-tag: #b2b2ff;
-  --faq-active: rgba(170, 157, 236, 0.1);
+  /* Brand — hero-matched blues (kept as --violet-* for existing selectors) */
+  --violet-900: #063a6b;
+  --violet-800: #116bb9;
+  --violet-500: #00a1ed;
+  --violet-300: #4db8e8;
+  --violet-200: #9ad4f0;
+  --violet-tag: #7ec8eb;
+  --faq-active: rgba(17, 107, 185, 0.12);
+  --brand-grad: linear-gradient(#00a1ed, #063a6b);
 
   /* Aliases used by styleguide / components */
   --brand: var(--violet-800);
@@ -119,7 +120,7 @@
   --shadow-sm: 0 4px 16px rgba(18, 18, 20, 0.06);
   --shadow-md: 0 12px 40px rgba(18, 18, 20, 0.1);
   --shadow-lg: 0 24px 64px rgba(18, 18, 20, 0.16);
-  --shadow-brand: 0 16px 48px rgba(56, 26, 201, 0.28);
+  --shadow-brand: 0 16px 48px rgba(17, 107, 185, 0.28);
   --focus-ring: 0 0 0 3px var(--violet-200);
 
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
