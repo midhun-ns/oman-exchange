@@ -1474,12 +1474,17 @@
   rotate: var(--tilt, 0deg);
 }
 
-.hero-float--om { top: 2%; left: -2%; width: clamp(78px, 9vw, 100px); }
-.hero-float--in { top: 0%; right: -4%; width: clamp(72px, 8.5vw, 94px); }
+.hero-float--om { top: 2%; left: -2%; width: clamp(64px, 7vw, 80px); }
+.hero-float--in { top: 0%; right: -4%; width: clamp(62px, 6.8vw, 78px); }
 .hero-float--swap { top: 42%; left: -14%; width: clamp(68px, 7.5vw, 86px); }
 .hero-float--coins { bottom: 10%; right: -10%; width: clamp(84px, 10vw, 105px); }
 .hero-float--send { top: 34%; right: -18%; width: clamp(64px, 7vw, 78px); }
 .hero-float--analytics { bottom: 6%; left: -6%; width: clamp(70px, 8vw, 88px); }
+
+.hero-float--om img,
+.hero-float--in img {
+  scale: 0.82;
+}
 
 @keyframes hero-float {
   0%, 100% { transform: translateY(0); }
@@ -1942,13 +1947,13 @@
   .hero-float--om {
     top: -2%;
     left: -2%;
-    width: 56px;
+    width: 48px;
   }
 
   .hero-float--in {
     top: -4%;
     right: -2%;
-    width: 52px;
+    width: 46px;
   }
 
   .hero-float--coins {
@@ -2065,13 +2070,13 @@
   .hero-float--om {
     top: 0;
     left: 0;
-    width: 40px;
+    width: 36px;
   }
 
   .hero-float--in {
     top: -2%;
     right: 0;
-    width: 38px;
+    width: 34px;
   }
 
   .hero-float--coins {
