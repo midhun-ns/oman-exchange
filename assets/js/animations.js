@@ -198,11 +198,11 @@ function initTestimonials(gsap) {
       [".t-card--video", { y: "50vh", scale: 0.9 }, 3],
     ];
 
-    // Resting CSS positions stay visible until the intro plays
-    gsap.set(cards, { autoAlpha: 1, x: 0, y: 0, rotation: 0, scale: 1 });
-    from.forEach(([sel, , z]) => {
+    // Hidden until scroll intro plays
+    from.forEach(([sel, vars, z]) => {
       const el = section.querySelector(sel);
-      if (el) gsap.set(el, { zIndex: z });
+      if (!el) return;
+      gsap.set(el, { ...vars, autoAlpha: 0, zIndex: z });
     });
 
     const tl = gsap.timeline({
@@ -213,12 +213,11 @@ function initTestimonials(gsap) {
       },
     });
 
-    from.forEach(([sel, vars, z], i) => {
+    from.forEach(([sel, , z], i) => {
       const el = section.querySelector(sel);
       if (!el) return;
-      tl.fromTo(
+      tl.to(
         el,
-        { ...vars, autoAlpha: 0 },
         {
           x: 0,
           y: 0,
@@ -227,7 +226,6 @@ function initTestimonials(gsap) {
           autoAlpha: 1,
           duration: 1.1,
           ease: "power3.out",
-          immediateRender: false,
           onStart: () => gsap.set(el, { zIndex: 5 }),
           onComplete: () => gsap.set(el, { zIndex: z, clearProps: "transform" }),
         },
@@ -252,13 +250,13 @@ function initTestimonials(gsap) {
   });
 
   mm.add("(max-width: 1023px) and (prefers-reduced-motion: no-preference)", () => {
-    gsap.from(cards, {
-      y: 32,
-      autoAlpha: 0,
-      duration: 0.55,
-      stagger: 0.06,
+    gsap.set(cards, { autoAlpha: 0, y: 32 });
+    gsap.to(cards, {
+      y: 0,
+      autoAlpha: 1,
+      duration: 0.7,
+      stagger: 0.08,
       ease: "power3.out",
-      immediateRender: false,
       scrollTrigger: {
         trigger: section,
         start: "top 80%",
