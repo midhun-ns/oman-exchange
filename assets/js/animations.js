@@ -153,28 +153,6 @@ function initFloatLoops() {
   /* Float loops start from the hero intro onComplete */
 }
 
-function initStatement(gsap) {
-  const section = document.querySelector("#about");
-  const words = gsap.utils.toArray("#about .word");
-  if (!section || !words.length) return;
-
-  if (reducedMotion || window.matchMedia("(max-width: 809px)").matches) {
-    words.forEach((w) => w.classList.add("is-active"));
-    return;
-  }
-
-  ScrollTrigger.create({
-    trigger: section,
-    start: "top top",
-    end: "bottom bottom",
-    scrub: 1,
-    onUpdate: (self) => {
-      const count = Math.floor(self.progress * words.length);
-      words.forEach((w, i) => w.classList.toggle("is-active", i <= count));
-    },
-  });
-}
-
 function initProof(gsap) {
   const section = document.querySelector("#proof");
   const ticker = document.querySelector("[data-proof-ticker]");
@@ -205,39 +183,88 @@ function initProof(gsap) {
 
 function initTestimonials(gsap) {
   const section = document.querySelector("#testimonials");
-  const cards = gsap.utils.toArray("[data-testimonial-card]");
-  if (!section || !cards.length) return;
+  const stage = section?.querySelector(".t-stage");
+  const cards = gsap.utils.toArray("#testimonials [data-testimonial-card]");
+  if (!section || !stage || !cards.length) return;
 
   const mm = gsap.matchMedia();
 
   mm.add("(min-width: 1024px) and (prefers-reduced-motion: no-preference)", () => {
+    const from = [
+      [".t-card--award", { x: "-60vw", y: "-8vh", rotation: -16 }, 1],
+      [".t-card--milestone", { x: "60vw", y: "-8vh", rotation: 16 }, 1],
+      [".t-card--partner", { x: "-60vw", y: "8vh", rotation: -12 }, 2],
+      [".t-card--community", { x: "60vw", y: "8vh", rotation: 12 }, 2],
+      [".t-card--video", { y: "50vh", scale: 0.9 }, 3],
+    ];
+
+    // Resting CSS positions stay visible until the intro plays
+    gsap.set(cards, { autoAlpha: 1, x: 0, y: 0, rotation: 0, scale: 1 });
+    from.forEach(([sel, , z]) => {
+      const el = section.querySelector(sel);
+      if (el) gsap.set(el, { zIndex: z });
+    });
+
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: section,
-        start: "top top",
-        end: "bottom bottom",
-        scrub: 1,
-        invalidateOnRefresh: true,
+        start: "top 70%",
+        toggleActions: "play none none none",
       },
     });
 
-    cards.forEach((card, i) => {
-      const r = parseFloat(getComputedStyle(card).getPropertyValue("--r")) || 0;
-      const fromLeft = card.classList.contains("t-pos-1") || card.classList.contains("t-pos-2");
-
+    from.forEach(([sel, vars, z], i) => {
+      const el = section.querySelector(sel);
+      if (!el) return;
       tl.fromTo(
-        card,
-        { autoAlpha: 0, scale: 0.82, x: fromLeft ? -64 : 64, y: 40, rotation: r },
-        { autoAlpha: 1, scale: 1, x: 0, y: 0, rotation: r, duration: 1, ease: "none" },
-        i
+        el,
+        { ...vars, autoAlpha: 0 },
+        {
+          x: 0,
+          y: 0,
+          rotation: 0,
+          scale: 1,
+          autoAlpha: 1,
+          duration: 1.1,
+          ease: "power3.out",
+          immediateRender: false,
+          onStart: () => gsap.set(el, { zIndex: 5 }),
+          onComplete: () => gsap.set(el, { zIndex: z, clearProps: "transform" }),
+        },
+        i * 0.18
       );
+    });
+
+    const pin = ScrollTrigger.create({
+      trigger: section,
+      start: "top top",
+      end: "+=100%",
+      pin: stage,
+      pinSpacing: true,
     });
 
     return () => {
       tl.scrollTrigger?.kill();
       tl.kill();
-      gsap.set(cards, { clearProps: "opacity,visibility,transform" });
+      pin.kill();
+      gsap.set(cards, { clearProps: "opacity,visibility,transform,zIndex" });
     };
+  });
+
+  mm.add("(max-width: 1023px) and (prefers-reduced-motion: no-preference)", () => {
+    gsap.from(cards, {
+      y: 32,
+      autoAlpha: 0,
+      duration: 0.55,
+      stagger: 0.06,
+      ease: "power3.out",
+      immediateRender: false,
+      scrollTrigger: {
+        trigger: section,
+        start: "top 80%",
+        toggleActions: "play none none none",
+      },
+    });
   });
 }
 
@@ -310,7 +337,6 @@ ready(async () => {
 
   initHero(gsap);
   initFloatLoops();
-  initStatement(gsap);
   initProof(gsap);
   initTestimonials(gsap);
   initReveals(gsap);

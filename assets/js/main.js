@@ -1003,8 +1003,8 @@ async function initRates() {
 
   if (data.disclaimer) {
     disclaimers.forEach((el) => {
-      el.textContent = data.disclaimer;
-    });
+    el.textContent = data.disclaimer;
+  });
   }
 
   const inr = getRate(data, "INR");
@@ -1087,7 +1087,7 @@ async function initRateStrip() {
   };
 
   qsa(".rate-strip__btn", root).forEach((btn) => {
-    btn.addEventListener("click", () => {
+      btn.addEventListener("click", () => {
       const dir = Number(btn.dataset.dir) * rtl;
       list.scrollBy({ left: step() * dir, behavior: "smooth" });
     });
