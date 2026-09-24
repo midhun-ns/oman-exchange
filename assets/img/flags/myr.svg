@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="45" height="32" viewBox="0 0 45 32">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="Rectangle_2099" data-name="Rectangle 2099" width="45" height="32" transform="translate(-14884 -23346)" fill="#fff"/>
+    </clipPath>
+  </defs>
+  <g id="MYR_" data-name="MYR " transform="translate(14884 23346)" clip-path="url(#clip-path)">
+    <g id="malaysia" transform="translate(-14896 -23373.752)">
+      <path id="Path_17168" data-name="Path 17168" d="M12,27.751H57.906v32H12Z" fill="#f0f0f0"/>
+      <g id="Group_3893" data-name="Group 3893" transform="translate(12 27.751)">
+        <path id="Path_17169" data-name="Path 17169" d="M12,27.751H57.906v4.572H12Z" transform="translate(-12 -27.751)" fill="#d60a2e"/>
+        <path id="Path_17170" data-name="Path 17170" d="M12,48.465H57.906v4.572H12Z" transform="translate(-12 -39.322)" fill="#d60a2e"/>
+        <path id="Path_17171" data-name="Path 17171" d="M12,69.178H57.906V73.75H12Z" transform="translate(-12 -50.892)" fill="#d60a2e"/>
+        <path id="Path_17172" data-name="Path 17172" d="M12,89.892H57.906v4.572H12Z" transform="translate(-12 -62.463)" fill="#d60a2e"/>
+      </g>
+      <path id="Path_17173" data-name="Path 17173" d="M12,27.751H33.334V41.465H12Z" fill="#0b55b1"/>
+      <path id="Path_17174" data-name="Path 17174" d="M42.161,40.248l-1.542-.925,1.039-1.51-1.688.617L39.458,36.8l-.511,1.631-1.688-.617,1.039,1.51-1.542.925,1.737.081-.244,1.818,1.209-1.331,1.209,1.331-.243-1.818Z" transform="translate(-13.829 -5.054)" fill="#fed953"/>
+      <path id="Path_17175" data-name="Path 17175" d="M29.694,41.066a3.525,3.525,0,1,1,1.327-6.791,4.541,4.541,0,1,0,0,6.531,3.512,3.512,0,0,1-1.327.26Z" transform="translate(-6.326 -2.932)" fill="#fed953"/>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,131 @@
+/**
+ * LuLu Exchange Oman — design tokens measured from OneFin.
+ * Swap --violet-800 / --brand to LuLu navy #002539 / cyan #00A1ED for a re-skin.
+ */
+
+:root {
+  /* Ink / dark surfaces */
+  --ink-900: #121214;
+  --ink-850: #1b1b1f;
+  --ink-800: #212124;
+  --ink-700: #292929;
+  --ink-btn: #282828;
+
+  /* Greys */
+  --grey-600: #525252;
+  --grey-500: #8f8f8f;
+  --grey-300: #d9d9d9;
+  --grey-200: #efefef;
+  --grey-100: #f5f5f5;
+  --white: #ffffff;
+  --white-80: #ffffffcc;
+  --white-60: #ffffff99;
+  --white-40: #ffffff66;
+  --white-20: #ffffff33;
+  --white-05: #ffffff0d;
+
+  /* Brand violet */
+  --violet-900: #28119c;
+  --violet-800: #381ac9;
+  --violet-500: #6262fe;
+  --violet-300: #9696ff;
+  --violet-200: #bebeff;
+  --violet-tag: #b2b2ff;
+  --faq-active: rgba(170, 157, 236, 0.1);
+
+  /* Aliases used by styleguide / components */
+  --brand: var(--violet-800);
+  --brand-dark: var(--violet-900);
+  --brand-300: var(--violet-500);
+  --brand-200: var(--violet-300);
+  --brand-100: var(--violet-200);
+  --ink-600: var(--ink-700);
+  --grey-400: var(--grey-500);
+  --grey-50: var(--grey-100);
+
+  /* Typography */
+  --font-display: "Roboto Condensed", sans-serif;
+  --font-body: "Geist", system-ui, sans-serif;
+
+  --text-h1-size: 128px;
+  --text-h1-weight: 900;
+  --text-h1-tracking: -0.05em;
+  --text-h3-size: 72px;
+  --text-h3-weight: 900;
+  --text-h3-tracking: -0.05em;
+  --text-closing-size: 128px;
+  --text-closing-weight: 900;
+  --text-closing-tracking: -0.05em;
+  --text-body-size: 16px;
+  --text-body-weight: 400;
+  --text-body-tracking: -0.02em;
+  --text-small-size: 14px;
+  --text-lead-size: 20px;
+
+  /* Radii */
+  --r-chip: 8px;
+  --r-tag: 10px;
+  --r-nav-link: 16px;
+  --r-btn: 20px;
+  --r-nav: 20px;
+  --r-card-sm: 24px;
+  --r-card: 40px;
+  --r-card-lg: 48px;
+  --r-price: 56px;
+  --r-panel: 60px;
+
+  --radius-chip: var(--r-chip);
+  --radius-card: 16px;
+  --radius-card-lg: var(--r-card-sm);
+  --radius-panel: 32px;
+  --radius-panel-lg: var(--r-panel);
+  --radius-pill: 999px;
+
+  /* Layout */
+  --container: 1344px;
+  --container-narrow: 720px;
+  --container-wide: 1344px;
+  --section-pad-x: 48px;
+  --section-pad-y: 80px;
+  --gutter: clamp(1rem, 4vw, 3rem);
+  --section-y: clamp(4rem, 8vw, 5rem);
+
+  /* Spacing scale (components) */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  --space-24: 6rem;
+
+  /* Effects */
+  --glass-bg: rgba(255, 255, 255, 0.72);
+  --glass-border: rgba(255, 255, 255, 0.45);
+  --glass-blur: 16px;
+  --shadow-sm: 0 4px 16px rgba(18, 18, 20, 0.06);
+  --shadow-md: 0 12px 40px rgba(18, 18, 20, 0.1);
+  --shadow-lg: 0 24px 64px rgba(18, 18, 20, 0.16);
+  --shadow-brand: 0 16px 48px rgba(56, 26, 201, 0.28);
+  --focus-ring: 0 0 0 3px var(--violet-200);
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --duration-fast: 150ms;
+  --duration: 280ms;
+  --duration-slow: 480ms;
+
+  --bg-page: var(--white);
+  --bg-muted: var(--grey-100);
+  --bg-dark: var(--ink-900);
+  --text-primary: var(--ink-900);
+  --text-secondary: var(--grey-600);
+  --text-muted: var(--grey-500);
+  --text-on-dark: var(--white);
+  --text-on-brand: var(--white);
+  --border-subtle: var(--grey-300);
+}

@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Design System Styleguide | LuLu Exchange Oman</title>
+  <meta name="description" content="OneFin design system tokens and components for the LuLu Exchange Oman static site." />
+  <meta name="robots" content="noindex" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Roboto+Condensed:wght@900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/assets/css/tokens.css" />
+  <link rel="stylesheet" href="/assets/css/base.css" />
+  <link rel="stylesheet" href="/assets/css/components.css" />
+  <style>
+    .sg-nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: var(--ink-900);
+      color: var(--white);
+      padding: 0.85rem 0;
+    }
+    .sg-nav .container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem 1.25rem;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .sg-nav a {
+      color: var(--white-60);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+    }
+    .sg-nav a:hover { color: var(--white); }
+    .sg-hero {
+      padding: 4rem 0 2rem;
+      background: var(--grey-50);
+    }
+    .token-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <header class="sg-nav">
+    <div class="container">
+      <strong style="font-family:var(--font-display);text-transform:uppercase;letter-spacing:-0.4px;">LuLu × OneFin Styleguide</strong>
+      <nav class="cluster" aria-label="Styleguide sections">
+        <a href="#tokens">Tokens</a>
+        <a href="#type">Type</a>
+        <a href="#buttons">Buttons</a>
+        <a href="#chips">Chips</a>
+        <a href="#navbar">Navbar</a>
+        <a href="#cards">Cards</a>
+        <a href="#rates">Rates</a>
+        <a href="#tabs">Tabs</a>
+        <a href="#accordion">Accordion</a>
+        <a href="#carousel">Carousel</a>
+        <a href="#marquee">Marquee</a>
+        <a href="#footer">Footer</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="sg-hero">
+      <div class="container stack stack--lg">
+        <span class="chip"><span class="chip__num">00</span> Design system</span>
+        <h1 class="h1">OneFin tokens.<br /><span class="t-brand">LuLu content.</span></h1>
+        <p class="t-lead" style="max-width:36rem;">Component library for the LuLu Exchange Oman static rebuild. Brand violet is centralised in <code>--brand</code> for a one-line cyan swap later.</p>
+      </div>
+    </section>
+
+    <!-- Tokens -->
+    <section class="sg-section" id="tokens">
+      <div class="container">
+        <p class="sg-label">Colour tokens</p>
+        <div class="token-grid">
+          <div class="sg-swatch"><div class="sg-swatch__chip" style="background:var(--brand)"></div><div class="sg-swatch__meta t-small"><strong>--brand</strong><br />#381AC9</div></div>
+          <div class="sg-swatch"><div class="sg-swatch__chip" style="background:var(--brand-dark)"></div><div class="sg-swatch__meta t-small"><strong>--brand-dark</strong><br />#28119C</div></div>
+          <div class="sg-swatch"><div class="sg-swatch__chip" style="background:var(--brand-300)"></div><div class="sg-swatch__meta t-small"><strong>--brand-300</strong></div></div>
+          <div class="sg-swatch"><div class="sg-swatch__chip" style="background:var(--brand-200)"></div><div class="sg-swatch__meta t-small"><strong>--brand-200</strong></div></div>
+          <div class="sg-swatch"><div class="sg-swatch__chip" style="background:var(--brand-100)"></div><div class="sg-swatch__meta t-small"><strong>--brand-100</strong></div></div>
+          <div class="sg-swatch"><div class="sg-swatch__chip" style="background:var(--ink-900)"></div><div class="sg-swatch__meta t-small"><strong>--ink-900</strong></div></div>
+          <div class="sg-swatch"><div class="sg-swatch__chip" style="background:var(--ink-800)"></div><div class="sg-swatch__meta t-small"><strong>--ink-800</strong></div></div>
+          <div class="sg-swatch"><div class="sg-swatch__chip" style="background:var(--ink-700)"></div><div class="sg-swatch__meta t-small"><strong>--ink-700</strong></div></div>
+          <div class="sg-swatch"><div class="sg-swatch__chip" style="background:var(--ink-600)"></div><div class="sg-swatch__meta t-small"><strong>--ink-600</strong></div></div>
+          <div class="sg-swatch"><div class="sg-swatch__chip" style="background:var(--grey-600)"></div><div class="sg-swatch__meta t-small"><strong>--grey-600</strong></div></div>
+          <div class="sg-swatch"><div class="sg-swatch__chip" style="background:var(--grey-400)"></div><div class="sg-swatch__meta t-small"><strong>--grey-400</strong></div></div>
+          <div class="sg-swatch"><div class="sg-swatch__chip" style="background:var(--grey-200)"></div><div class="sg-swatch__meta t-small"><strong>--grey-200</strong></div></div>
+          <div class="sg-swatch"><div class="sg-swatch__chip" style="background:var(--grey-100)"></div><div class="sg-swatch__meta t-small"><strong>--grey-100</strong></div></div>
+          <div class="sg-swatch"><div class="sg-swatch__chip" style="background:var(--grey-50)"></div><div class="sg-swatch__meta t-small"><strong>--grey-50</strong></div></div>
+          <div class="sg-swatch"><div class="sg-swatch__chip" style="background:var(--white);border-bottom:1px solid var(--grey-200)"></div><div class="sg-swatch__meta t-small"><strong>--white</strong></div></div>
+        </div>
+        <p class="t-small t-muted" style="margin-top:1rem;">Radii: chip 8px · cards 16–24px · panels 32–60px · pills 999px</p>
+      </div>
+    </section>
+
+    <!-- Type -->
+    <section class="sg-section" id="type">
+      <div class="container stack stack--lg">
+        <p class="sg-label">Typography</p>
+        <div>
+          <p class="t-small t-muted">H1 · Roboto Condensed 900 · clamp → 48px</p>
+          <p class="h1">Send smart. Live smart.</p>
+        </div>
+        <div>
+          <p class="t-small t-muted">Section H3 · 36px</p>
+          <p class="section-title">We value your hard-earned money</p>
+        </div>
+        <div>
+          <p class="t-small t-muted">Closing words · 128px</p>
+          <p class="t-closing">Send.</p>
+        </div>
+        <div>
+          <p class="t-small t-muted">Lead / body / small · Geist</p>
+          <p class="t-lead">Transfer money to 140+ countries easily and securely.</p>
+          <p class="t-body" style="margin-top:0.75rem;">Rates are indicative and subject to change. Contact our nearest branch for the latest rates.</p>
+          <p class="t-small t-muted" style="margin-top:0.5rem;">Updated 23 Sep 2026 · Sample styleguide copy</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Buttons -->
+    <section class="sg-section" id="buttons">
+      <div class="container">
+        <p class="sg-label">Buttons</p>
+        <div class="cluster" style="margin-bottom:1.5rem;">
+          <a class="btn btn--primary" href="#">Download LuLu Money</a>
+          <a class="btn btn--secondary" href="#">Locate a branch</a>
+          <a class="btn btn--ghost" href="#">View all news</a>
+          <a class="btn btn--primary btn--sm" href="#">Download app</a>
+        </div>
+        <div class="card card--dark cluster">
+          <a class="btn btn--primary" href="#">Primary on dark</a>
+          <a class="btn btn--ghost-on-dark" href="#">Ghost on dark</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Chips -->
+    <section class="sg-section" id="chips">
+      <div class="container">
+        <p class="sg-label">Eyebrow chips</p>
+        <div class="cluster">
+          <span class="chip"><span class="chip__num">01</span> Benefits</span>
+          <span class="chip"><span class="chip__num">02</span> Key features</span>
+          <span class="chip chip--brand">Trusted in Oman for 15 years</span>
+          <span class="chip chip--on-dark" style="background:#121214;"><span class="chip__num">04</span> Testimonials</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Navbar -->
+    <section class="sg-section" id="navbar">
+      <div class="container" style="margin-bottom:1rem;">
+        <p class="sg-label">Floating glass navbar</p>
+      </div>
+      <header class="site-header" style="position:relative;">
+        <div class="navbar" data-navbar>
+          <a class="navbar__brand" href="/">
+            <img class="navbar__logo" src="/assets/img/logo-lulu-light.svg" width="140" height="36" alt="LuLu Exchange" />
+          </a>
+          <nav class="navbar__nav" aria-label="Primary">
+            <a class="navbar__link" href="/about.html">About</a>
+            <div class="dropdown" data-dropdown>
+              <button class="navbar__link" type="button" data-dropdown-trigger aria-expanded="false" aria-haspopup="true">
+                Services
+                <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+              </button>
+              <div class="dropdown__menu" data-dropdown-menu role="menu">
+                <a class="dropdown__item" href="/services/money-transfer.html" role="menuitem">Money Transfer</a>
+                <a class="dropdown__item" href="/services/currency-exchange.html" role="menuitem">Currency Exchange</a>
+                <a class="dropdown__item" href="/services/import-export.html" role="menuitem">Import &amp; Export</a>
+                <a class="dropdown__item" href="/services/value-added.html" role="menuitem">Value Added Services</a>
+              </div>
+            </div>
+            <a class="navbar__link" href="https://branches.luluexchange.com.om/" target="_blank" rel="noopener">Branches</a>
+            <a class="navbar__link" href="/lulu-money.html">LuLu Money</a>
+            <a class="navbar__link" href="/news.html">News</a>
+            <a class="navbar__link" href="/careers.html">Careers</a>
+            <a class="navbar__link" href="/contact.html">Contact</a>
+          </nav>
+          <div class="navbar__actions">
+            <div class="dropdown country-select" data-dropdown>
+              <button class="country-select__btn" type="button" data-dropdown-trigger aria-expanded="false" aria-haspopup="listbox">
+                Oman
+                <svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+              </button>
+              <div class="dropdown__menu country-select__menu" data-dropdown-menu role="listbox">
+                <a class="dropdown__item" href="#" role="option">UAE</a>
+                <a class="dropdown__item" href="#" role="option">Kuwait</a>
+                <a class="dropdown__item" href="#" role="option">Bahrain</a>
+                <a class="dropdown__item" href="#" role="option">Qatar</a>
+                <a class="dropdown__item" href="#" role="option">India</a>
+                <a class="dropdown__item" href="#" role="option">Philippines</a>
+                <a class="dropdown__item" href="#" role="option">Hong Kong</a>
+                <a class="dropdown__item" href="#" role="option">Malaysia</a>
+                <a class="dropdown__item" href="#" role="option">Singapore</a>
+              </div>
+            </div>
+            <a class="btn btn--primary btn--sm" href="/lulu-money.html">Download app</a>
+            <button class="navbar__toggle" type="button" data-nav-toggle aria-expanded="false" aria-label="Open menu">
+              <span class="navbar__toggle-bars" aria-hidden="true"><span></span><span></span><span></span></span>
+            </button>
+          </div>
+        </div>
+      </header>
+    </section>
+
+    <!-- Cards -->
+    <section class="sg-section" id="cards">
+      <div class="container stack stack--lg">
+        <div>
+          <p class="sg-label">Bento · Benefits</p>
+          <div class="bento">
+            <article class="bento__card">
+              <h3 class="card__title">Best market rates</h3>
+              <p class="card__body">Buy and exchange currency securely, at the best market rates.</p>
+            </article>
+            <article class="bento__card">
+              <h3 class="card__title">Send to 140+ countries</h3>
+              <p class="card__body">Send your money anywhere you want, with ease and efficiency.</p>
+            </article>
+            <article class="bento__card bento__card--stat">
+              <p class="bento__stat">1 OMR = 248.45 INR</p>
+              <p class="t-small" style="color:var(--white-60)">Today's rate, updated daily.</p>
+            </article>
+            <article class="bento__card">
+              <h3 class="card__title">Secure every step</h3>
+              <p class="card__body">Quick and secure exchange procedure. Warranted practices.</p>
+            </article>
+          </div>
+        </div>
+
+        <div>
+          <p class="sg-label">Metric cards</p>
+          <div class="grid-3">
+            <article class="metric-card">
+              <p class="metric-card__value">46</p>
+              <div>
+                <p class="metric-card__label">Branches across Oman</p>
+                <p class="metric-card__support">Walk in at any of our customer engagement centres nationwide.</p>
+              </div>
+            </article>
+            <article class="metric-card">
+              <p class="metric-card__value">350+</p>
+              <div>
+                <p class="metric-card__label">Branches worldwide</p>
+                <p class="metric-card__support">Part of LuLu Financial Group's global network.</p>
+              </div>
+            </article>
+            <article class="metric-card">
+              <p class="metric-card__value">15M</p>
+              <div>
+                <p class="metric-card__label">Customers worldwide</p>
+                <p class="metric-card__support">Trusting us with their hard-earned money.</p>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <div>
+          <p class="sg-label">News cards</p>
+          <div class="grid-4">
+            <a class="news-card" href="/news-article.html">
+              <div class="news-card__media"><img src="/assets/img/news-placeholder.svg" alt="" width="640" height="400" /></div>
+              <div class="news-card__body">
+                <p class="news-card__meta">12 Mar 2026</p>
+                <h3 class="news-card__title">New Customer Engagement Center in Mabelah</h3>
+                <p class="news-card__excerpt">LuLu Exchange opens a new centre and upgrades Tharmad.</p>
+              </div>
+            </a>
+            <a class="news-card" href="/news-article.html">
+              <div class="news-card__media"><img src="/assets/img/news-placeholder.svg" alt="" width="640" height="400" /></div>
+              <div class="news-card__body">
+                <p class="news-card__meta">2 Jan 2026</p>
+                <h3 class="news-card__title">15 Years of Trust in Oman</h3>
+                <p class="news-card__excerpt">Celebrating a decade and a half of service in the Sultanate.</p>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <div>
+          <p class="sg-label">Floating hero cards + phone + converter</p>
+          <div class="hero__visual" style="background:var(--grey-50);border-radius:var(--radius-panel);padding:2rem;">
+            <div class="float-card hero__float hero__float--rate">
+              <div class="float-card__icon"><img src="/assets/img/flag-in.svg" alt="" width="24" height="24" /></div>
+              <div>
+                <p class="float-card__label">Live rate</p>
+                <p class="float-card__value">1.00 OMR = 248.45 INR</p>
+              </div>
+            </div>
+            <img class="hero__phone placeholder--phone" src="/assets/img/phone-mockup.svg" width="280" height="560" alt="LuLu Money app placeholder" />
+            <div class="float-card hero__float hero__float--branch">
+              <div class="float-card__icon" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2a6 6 0 0 0-6 6c0 4.5 6 10 6 10s6-5.5 6-10a6 6 0 0 0-6-6Zm0 8.5A2.5 2.5 0 1 1 10 5.5a2.5 2.5 0 0 1 0 5Z" fill="#381AC9"/></svg>
+              </div>
+              <div>
+                <p class="float-card__label">Nationwide</p>
+                <p class="float-card__value">46 branches across Oman</p>
+              </div>
+            </div>
+          </div>
+          <div class="converter converter--compact" data-converter style="max-width:360px;margin-top:1.5rem;">
+            <div class="converter__row">
+              <div class="converter__field">
+                <label class="converter__label" for="sg-amount">You send</label>
+                <input class="converter__input" id="sg-amount" type="text" inputmode="decimal" value="1.00" data-converter-amount />
+              </div>
+              <div class="converter__field">
+                <label class="converter__label" for="sg-from">From</label>
+                <select class="converter__select" id="sg-from" data-converter-from></select>
+              </div>
+            </div>
+            <div class="converter__row" style="margin-top:0.75rem;">
+              <div class="converter__field" style="grid-column:1/-1;">
+                <label class="converter__label" for="sg-to">They receive</label>
+                <select class="converter__select" id="sg-to" data-converter-to></select>
+              </div>
+            </div>
+            <div class="converter__result">
+              <p class="t-small t-muted">Converted amount</p>
+              <p class="converter__result-value" data-converter-result>—</p>
+              <p class="converter__disclaimer" data-rates-disclaimer></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Rates -->
+    <section class="sg-section" id="rates">
+      <div class="container" data-rates data-rates-mode="transfer">
+        <p class="sg-label">Rate cards + Transfer / Exchange toggle</p>
+        <div class="cluster" style="margin-bottom:1.5rem;">
+          <div class="toggle" role="group" aria-label="Rate type">
+            <button class="toggle__btn" type="button" data-rate-toggle="transfer" aria-pressed="true">Money Transfer</button>
+            <button class="toggle__btn" type="button" data-rate-toggle="exchange" aria-pressed="false">Currency Exchange</button>
+          </div>
+          <p class="t-small t-muted" data-rates-updated></p>
+        </div>
+        <div class="grid-3" data-rates-grid style="align-items:stretch;"></div>
+        <p class="rates-disclaimer" data-rates-disclaimer style="margin-top:1rem;"></p>
+      </div>
+    </section>
+
+    <!-- Tabs -->
+    <section class="sg-section section--dark" id="tabs">
+      <div class="container">
+        <p class="sg-label" style="color:var(--white-40)">Tabbed feature panels</p>
+        <div class="tabs" data-tabs>
+          <div class="tabs__list" role="tablist" aria-label="Services">
+            <button class="tabs__tab" role="tab" id="tab-mt" aria-selected="true" aria-controls="panel-mt" tabindex="0">Money Transfer</button>
+            <button class="tabs__tab" role="tab" id="tab-fx" aria-selected="false" aria-controls="panel-fx" tabindex="-1">Currency Exchange</button>
+            <button class="tabs__tab" role="tab" id="tab-ie" aria-selected="false" aria-controls="panel-ie" tabindex="-1">Import &amp; Export</button>
+            <button class="tabs__tab" role="tab" id="tab-vas" aria-selected="false" aria-controls="panel-vas" tabindex="-1">Value Added Services</button>
+          </div>
+          <div class="tabs__panel" role="tabpanel" id="panel-mt" aria-labelledby="tab-mt">
+            <p class="t-lead t-on-dark" style="margin-bottom:1.5rem;max-width:36rem;">Send your money anywhere you want, with ease and efficiency.</p>
+            <div class="tabs__panel-grid">
+              <article class="feature-subcard"><h4>Instant Account Credit</h4><p>LuLu Now to India, Philippines, Pakistan, Sri Lanka, Bangladesh, Nepal, Egypt, Indonesia.</p></article>
+              <article class="feature-subcard"><h4>Direct to Account</h4><p>Send money directly to a bank account worldwide.</p></article>
+              <article class="feature-subcard"><h4>Cash Pick Up</h4><p>Collect from 50,000+ partner locations.</p></article>
+            </div>
+          </div>
+          <div class="tabs__panel" role="tabpanel" id="panel-fx" aria-labelledby="tab-fx" hidden>
+            <p class="t-lead t-on-dark" style="margin-bottom:1.5rem;">Buy and exchange currency securely, at the best market rates.</p>
+            <div class="tabs__panel-grid">
+              <article class="feature-subcard"><h4>Best market rates</h4><p>Competitive buy and sell rates daily.</p></article>
+              <article class="feature-subcard"><h4>Quick &amp; secure</h4><p>Warranted practices at every branch.</p></article>
+              <article class="feature-subcard"><h4>Wide currency range</h4><p>Major and corridor currencies in stock.</p></article>
+            </div>
+          </div>
+          <div class="tabs__panel" role="tabpanel" id="panel-ie" aria-labelledby="tab-ie" hidden>
+            <p class="t-lead t-on-dark" style="margin-bottom:1.5rem;">Trade your foreign currency securely with our dedicated Bank Notes team.</p>
+            <div class="tabs__panel-grid">
+              <article class="feature-subcard"><h4>Best market rate</h4><p>Transparent pricing for bulk notes.</p></article>
+              <article class="feature-subcard"><h4>End-to-end security</h4><p>Handled by specialists end to end.</p></article>
+              <article class="feature-subcard"><h4>SME &amp; traders</h4><p>Competitive rates for business clients.</p></article>
+            </div>
+          </div>
+          <div class="tabs__panel" role="tabpanel" id="panel-vas" aria-labelledby="tab-vas" hidden>
+            <p class="t-lead t-on-dark" style="margin-bottom:1.5rem;">Recharge and top-up services at every branch.</p>
+            <div class="tabs__panel-grid">
+              <article class="feature-subcard"><h4>Ding recharge</h4><p>International mobile top-ups.</p></article>
+              <article class="feature-subcard"><h4>Ooredoo prepaid</h4><p>Recharge at any LuLu Exchange branch.</p></article>
+              <article class="feature-subcard"><h4>Omantel prepaid</h4><p>Local prepaid top-ups nationwide.</p></article>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Accordion -->
+    <section class="sg-section" id="accordion">
+      <div class="container" style="max-width:48rem;">
+        <p class="sg-label">FAQ accordion</p>
+        <div class="accordion" data-accordion>
+          <div class="accordion__item" data-accordion-item data-open="true">
+            <button class="accordion__trigger" type="button" data-accordion-trigger aria-expanded="true" aria-controls="faq-1" id="faq-1-btn">
+              How many countries can I send money to?
+              <span class="accordion__icon" aria-hidden="true">+</span>
+            </button>
+            <div class="accordion__panel" data-accordion-panel id="faq-1" role="region" aria-labelledby="faq-1-btn">
+              140+ countries via branches or LuLu Money.
+            </div>
+          </div>
+          <div class="accordion__item" data-accordion-item data-open="false">
+            <button class="accordion__trigger" type="button" data-accordion-trigger aria-expanded="false" aria-controls="faq-2" id="faq-2-btn">
+              How fast is a bank transfer?
+              <span class="accordion__icon" aria-hidden="true">+</span>
+            </button>
+            <div class="accordion__panel" data-accordion-panel id="faq-2" role="region" aria-labelledby="faq-2-btn" hidden>
+              LuLu Now gives instant account credit in 8 countries.
+            </div>
+          </div>
+          <div class="accordion__item" data-accordion-item data-open="false">
+            <button class="accordion__trigger" type="button" data-accordion-trigger aria-expanded="false" aria-controls="faq-3" id="faq-3-btn">
+              Are the rates on the site final?
+              <span class="accordion__icon" aria-hidden="true">+</span>
+            </button>
+            <div class="accordion__panel" data-accordion-panel id="faq-3" role="region" aria-labelledby="faq-3-btn" hidden>
+              No, they are indicative; confirm at a branch.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Carousel -->
+    <section class="sg-section section--dark" id="carousel">
+      <div class="container">
+        <p class="sg-label" style="color:var(--white-40)">Testimonials carousel</p>
+        <div class="carousel" data-carousel>
+          <div class="carousel__track" data-carousel-track>
+            <article class="carousel__slide testimonial-card testimonial-card--video">
+              <div class="testimonial-card__media">
+                <img src="/assets/img/video-poster.svg" alt="Video testimonial poster placeholder" width="640" height="400" />
+                <div class="testimonial-card__play">
+                  <button class="testimonial-card__play-btn" type="button" aria-label="Play testimonial video">
+                    <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M5 3.5v11l10-5.5L5 3.5z" fill="currentColor"/></svg>
+                  </button>
+                </div>
+              </div>
+              <div class="testimonial-card__body">
+                <p class="testimonial-card__quote">Watch how LuLu Exchange supports Al Mansoori Petroleum Services.</p>
+                <p class="testimonial-card__author">Sulfikur Ahammed</p>
+                <p class="testimonial-card__role">Finance Manager — Al Mansoori Petroleum Services</p>
+              </div>
+            </article>
+            <article class="carousel__slide testimonial-card">
+              <div class="testimonial-card__body" style="padding:2rem;min-height:360px;">
+                <div class="placeholder placeholder--dark" style="flex:1;min-height:120px;">
+                  <!-- TODO(client): real customer quote -->
+                  Quote pending
+                </div>
+                <p class="testimonial-card__author" style="margin-top:1rem;">Customer name</p>
+                <p class="testimonial-card__role">Role / location — TODO(client)</p>
+              </div>
+            </article>
+            <article class="carousel__slide testimonial-card">
+              <div class="testimonial-card__body" style="padding:2rem;min-height:360px;">
+                <div class="placeholder placeholder--dark" style="flex:1;min-height:120px;">Quote pending</div>
+                <p class="testimonial-card__author" style="margin-top:1rem;">Customer name</p>
+                <p class="testimonial-card__role">Role / location — TODO(client)</p>
+              </div>
+            </article>
+          </div>
+          <div class="carousel__controls">
+            <button class="carousel__btn" type="button" data-carousel-prev aria-label="Previous testimonial">←</button>
+            <button class="carousel__btn" type="button" data-carousel-next aria-label="Next testimonial">→</button>
+            <span class="rating-badge">Oman's Most Trusted Brand 2025</span>
+            <!-- TODO(client): confirm current app store rating figures -->
+            <span class="rating-badge">App rating — TODO</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Marquee + statement + final CTA -->
+    <section class="sg-section" id="marquee">
+      <div class="container stack stack--lg">
+        <div>
+          <p class="sg-label">Logo marquee</p>
+          <div class="marquee" aria-label="Awards and partners">
+            <div class="marquee__track">
+              <div class="marquee__item"><img src="/assets/img/award-omtb-2024.svg" alt="OMTB 2024 Winner" height="40" /></div>
+              <div class="marquee__item"><img src="/assets/img/award-trusted-2024.svg" alt="Most Trusted Brand 2024" height="40" /></div>
+              <div class="marquee__item"><img src="/assets/img/award-trusted-2025.svg" alt="Most Trusted Brand 2025" height="40" /></div>
+              <div class="marquee__item"><img src="/assets/img/partner-omantel.svg" alt="Omantel" height="40" /></div>
+              <div class="marquee__item"><img src="/assets/img/partner-ooredoo.svg" alt="Ooredoo" height="40" /></div>
+              <div class="marquee__item"><img src="/assets/img/partner-ding.svg" alt="Ding" height="40" /></div>
+              <div class="marquee__item"><img src="/assets/img/partner-afa.svg" alt="Argentine Football Association" height="40" /></div>
+              <div class="marquee__item"><img src="/assets/img/partner-cbo.svg" alt="Central Bank of Oman licence mark" height="40" /></div>
+              <!-- duplicate for loop -->
+              <div class="marquee__item"><img src="/assets/img/award-omtb-2024.svg" alt="" height="40" /></div>
+              <div class="marquee__item"><img src="/assets/img/award-trusted-2024.svg" alt="" height="40" /></div>
+              <div class="marquee__item"><img src="/assets/img/award-trusted-2025.svg" alt="" height="40" /></div>
+              <div class="marquee__item"><img src="/assets/img/partner-omantel.svg" alt="" height="40" /></div>
+              <div class="marquee__item"><img src="/assets/img/partner-ooredoo.svg" alt="" height="40" /></div>
+              <div class="marquee__item"><img src="/assets/img/partner-ding.svg" alt="" height="40" /></div>
+              <div class="marquee__item"><img src="/assets/img/partner-afa.svg" alt="" height="40" /></div>
+              <div class="marquee__item"><img src="/assets/img/partner-cbo.svg" alt="" height="40" /></div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <p class="sg-label">Statement band</p>
+          <div class="statement">
+            <div class="statement__flags" aria-hidden="true">
+              <img class="flag-float" src="/assets/img/flag-in.svg" alt="" style="top:12%;left:8%;" />
+              <img class="flag-float" src="/assets/img/flag-pk.svg" alt="" style="top:20%;right:12%;" />
+              <img class="flag-float" src="/assets/img/flag-bd.svg" alt="" style="bottom:18%;left:14%;" />
+              <img class="flag-float" src="/assets/img/flag-ph.svg" alt="" style="bottom:22%;right:10%;" />
+              <img class="flag-float" src="/assets/img/flag-eg.svg" alt="" style="top:48%;left:4%;" />
+              <img class="flag-float" src="/assets/img/flag-ae.svg" alt="" style="top:55%;right:6%;" />
+              <img class="flag-float" src="/assets/img/flag-gb.svg" alt="" style="top:8%;left:42%;" />
+              <img class="flag-float" src="/assets/img/flag-lk.svg" alt="" style="bottom:10%;left:48%;" />
+            </div>
+            <p class="statement__text">From your nearest branch to your phone, LuLu Exchange makes every transfer, exchange and recharge simple, secure and on time.</p>
+          </div>
+        </div>
+
+        <div>
+          <p class="sg-label">Final CTA</p>
+          <div class="final-cta">
+            <div class="final-cta__words">
+              <span class="t-closing">Send.</span>
+              <span class="t-closing">Exchange.</span>
+              <span class="t-closing">Connect.</span>
+            </div>
+            <div class="cluster" style="justify-content:center;margin-bottom:1.5rem;">
+              <img src="/assets/img/phone-mockup.svg" alt="LuLu Money app placeholder" width="140" height="280" style="border-radius:20px;" />
+              <img src="/assets/img/phone-mockup.svg" alt="LuLu Money send screen placeholder" width="140" height="280" style="border-radius:20px;" />
+            </div>
+            <div class="store-badges" style="margin-bottom:1.5rem;">
+              <a class="store-badge" href="#" aria-label="Download on the App Store"><span>Download on the<br /><strong>App Store</strong></span></a>
+              <a class="store-badge" href="#" aria-label="Get it on Google Play"><span>Get it on<br /><strong>Google Play</strong></span></a>
+            </div>
+            <img class="qr-placeholder" src="/assets/img/qr-code.svg" width="120" height="120" alt="QR code placeholder to download LuLu Money" style="margin-bottom:1.5rem;" />
+            <div class="socials">
+              <a href="#" aria-label="Facebook">Fb</a>
+              <a href="#" aria-label="Instagram">Ig</a>
+              <a href="#" aria-label="LinkedIn">In</a>
+              <a href="#" aria-label="YouTube">Yt</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer" id="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <img class="footer__logo" src="/assets/img/logo-lulu-dark.svg" width="160" height="40" alt="LuLu Exchange" />
+          <p class="footer__tagline">Simplifying Money. Simplifying Life. Transfer, exchange and recharge across Oman and 140+ countries.</p>
+        </div>
+        <div class="footer__col">
+          <h3>Quick links</h3>
+          <a href="/">Home</a>
+          <a href="https://branches.luluexchange.com.om/">Branch Locations</a>
+          <a href="/lulu-money.html">LuLu Money</a>
+          <a href="/about.html">About</a>
+          <a href="/contact.html">Contact</a>
+          <a href="/careers.html">Careers</a>
+          <a href="/news.html">News</a>
+        </div>
+        <div class="footer__col">
+          <h3>Services</h3>
+          <a href="/services/money-transfer.html">Money Transfer</a>
+          <a href="/services/currency-exchange.html">Currency Exchange</a>
+          <a href="/services/import-export.html">Import &amp; Export</a>
+          <a href="/services/value-added.html">Value Added Services</a>
+        </div>
+        <div class="footer__col">
+          <h3>Legal</h3>
+          <a href="/privacy.html">Data Privacy Policy</a>
+          <!-- TODO(client): link AML/CFT PDF -->
+          <a href="#">AML/CFT Policy (PDF)</a>
+          <!-- TODO(client): link Consumer Protection PDF -->
+          <a href="#">Consumer Protection Policy (PDF)</a>
+          <a href="/terms.html">Terms and Conditions</a>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p>© 2026 LuLu Exchange Co. LLC. All Rights Reserved.</p>
+        <div class="socials">
+          <a href="#" aria-label="Facebook">Fb</a>
+          <a href="#" aria-label="Instagram">Ig</a>
+          <a href="#" aria-label="LinkedIn">In</a>
+          <a href="#" aria-label="YouTube">Yt</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="/assets/js/main.js"></script>
+</body>
+</html>

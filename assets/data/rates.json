@@ -1,0 +1,19 @@
+{
+  "lastUpdated": "2026-09-23T12:00:00+04:00",
+  "base": "OMR",
+  "disclaimer": "Rates are indicative and subject to change. Contact our nearest branch for the latest rates.",
+  "transfer": [
+    { "code": "USD", "name": "US Dollar", "rate": 2.5974, "flag": "us" },
+    { "code": "INR", "name": "Indian Rupee", "rate": 248.45, "flag": "in", "featured": true },
+    { "code": "PHP", "name": "Philippine Peso", "rate": 151.32, "flag": "ph" },
+    { "code": "BDT", "name": "Bangladesh Taka", "rate": 314.80, "flag": "bd" },
+    { "code": "KWD", "name": "Kuwait Dinar", "rate": 0.7982, "flag": "kw" }
+  ],
+  "exchange": [
+    { "code": "USD", "name": "US Dollar", "buy": 2.5800, "sell": 2.6150, "flag": "us" },
+    { "code": "INR", "name": "Indian Rupee", "buy": 246.10, "sell": 250.80, "flag": "in", "featured": true },
+    { "code": "PHP", "name": "Philippine Peso", "buy": 149.50, "sell": 153.20, "flag": "ph" },
+    { "code": "BDT", "name": "Bangladesh Taka", "buy": 310.00, "sell": 319.50, "flag": "bd" },
+    { "code": "KWD", "name": "Kuwait Dinar", "buy": 0.7900, "sell": 0.8100, "flag": "kw" }
+  ]
+}
