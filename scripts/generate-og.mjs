@@ -49,7 +49,12 @@ await sharp(svg)
   .png({ compressionLevel: 8 })
   .toFile("assets/img/og-image.png");
 
-const out = await sharp("assets/img/og-image.png").metadata();
+await sharp("assets/img/og-image.png")
+  .removeAlpha()
+  .jpeg({ quality: 88, mozjpeg: true })
+  .toFile("assets/img/og-image.jpg");
+
+const out = await sharp("assets/img/og-image.jpg").metadata();
 console.log(
-  `wrote assets/img/og-image.png ${out.width}x${out.height} (${statSync("assets/img/og-image.png").size} bytes)`
+  `wrote assets/img/og-image.jpg ${out.width}x${out.height} (${statSync("assets/img/og-image.jpg").size} bytes)`
 );
