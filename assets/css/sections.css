@@ -1407,55 +1407,55 @@
   }
 }
 
-/* Keep right-side floats/orbits inside the viewport on mid desktops */
-@media (max-width: 1439px) and (min-width: 1025px) {
+/* Keep right-side floats/orbits inside the viewport */
+@media (max-width: 1299px) and (min-width: 1025px) {
   .hero__visual {
-    width: min(460px, 100%);
+    width: min(420px, 100%);
     max-width: 100%;
     justify-self: center;
-    padding: clamp(36px, 4.5vw, 56px) clamp(40px, 4vw, 56px);
+    padding: clamp(32px, 4vw, 48px) clamp(44px, 4.5vw, 56px);
   }
 
   .hero__orbits {
-    inset: 10% 8%;
+    inset: 12% 10%;
   }
 
   .hero__orbit-ring:nth-child(2) {
-    inset: -6%;
+    inset: -4%;
   }
 
   .hero__orbit-ring:nth-child(3) {
-    inset: -14%;
+    inset: -10%;
   }
 
   .hero-float--in {
     top: 2%;
-    right: 4%;
-    width: clamp(56px, 5.5vw, 70px);
+    right: 6%;
+    width: clamp(52px, 5vw, 64px);
   }
 
   .hero-float--send {
     top: 36%;
-    right: 0;
-    width: clamp(52px, 5vw, 66px);
+    right: 4%;
+    width: clamp(48px, 4.5vw, 60px);
   }
 
   .hero-float--coins {
     bottom: 8%;
-    right: 2%;
-    width: clamp(72px, 7vw, 88px);
+    right: 4%;
+    width: clamp(64px, 6vw, 80px);
   }
 
   .hero-float--om {
-    left: 0;
+    left: 2%;
   }
 
   .hero-float--swap {
-    left: -6%;
+    left: -2%;
   }
 
   .hero-float--analytics {
-    left: 0;
+    left: 2%;
   }
 }
 
@@ -1981,8 +1981,8 @@
   }
 
   .hero__visual {
-    width: min(500px, 82vw);
-    padding: 56px 48px 36px;
+    width: min(460px, 78vw);
+    padding: 52px 56px 36px;
     justify-self: center;
     margin-inline: auto;
   }
@@ -2022,28 +2022,28 @@
   }
 
   .hero-float--om {
-    top: -6%;
-    left: -10%;
+    top: -4%;
+    left: 0;
   }
 
   .hero-float--in {
-    top: -8%;
-    right: -10%;
+    top: -6%;
+    right: 0;
   }
 
   .hero-float--swap {
     top: 38%;
-    left: -20%;
+    left: -6%;
   }
 
   .hero-float--coins {
-    bottom: -4%;
-    right: -16%;
+    bottom: 0;
+    right: -2%;
   }
 
   .hero-float--analytics {
-    bottom: -6%;
-    left: -14%;
+    bottom: -2%;
+    left: -2%;
   }
 }
 
@@ -4996,14 +4996,24 @@
 
 @media (max-width: 1199px) and (min-width: 810px) {
   .site-footer {
-    min-height: 760px;
+    /* pad(120) + wm(280) + main(400) - 50% wm underlap(140) ≈ 660 */
+    min-height: 680px;
+    --footer-wm-h: 280px;
+  }
+
+  .footer-wordmark {
+    height: var(--footer-wm-h);
   }
 
   .footer-main {
-    position: relative;
-    margin-top: calc(var(--footer-wm-h, 313px) * -0.5);
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin-top: 0;
     z-index: 2;
     height: auto;
+    min-height: 400px;
   }
 
   .footer-arch {
@@ -5012,7 +5022,7 @@
 
   .footer-links {
     height: auto;
-    padding: 48px 48px 24px;
+    padding: 56px 48px 24px;
   }
 
   .footer-card {
@@ -5036,7 +5046,7 @@
   .site-footer {
     padding: 80px var(--section-pad-x) 0;
     min-height: 0;
-    --footer-wm-h: 120px;
+    --footer-wm-h: 160px;
   }
 
   .footer-wordmark {

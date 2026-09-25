@@ -1145,16 +1145,24 @@ async function initRateStrip() {
     if (reducedMotion || !("IntersectionObserver" in window)) {
       reveal();
     } else {
-      const io = new IntersectionObserver(
-        (entries) => {
-          if (entries.some((e) => e.isIntersecting)) {
-            reveal();
-            io.disconnect();
-          }
-        },
-        { threshold: 0, rootMargin: "0px 0px -10% 0px" }
-      );
-      io.observe(qs("#benefits") || root);
+      const nearViewport = () => {
+        const rect = root.getBoundingClientRect();
+        return rect.top < window.innerHeight * 0.92;
+      };
+      if (nearViewport()) {
+        reveal();
+      } else {
+        const io = new IntersectionObserver(
+          (entries) => {
+            if (entries.some((e) => e.isIntersecting)) {
+              reveal();
+              io.disconnect();
+            }
+          },
+          { threshold: 0, rootMargin: "0px 0px 35% 0px" }
+        );
+        io.observe(root);
+      }
     }
   }
 }
