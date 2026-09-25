@@ -1912,7 +1912,7 @@
 
   .hero__visual {
     width: min(500px, 82vw);
-    padding: 56px 40px;
+    padding: 72px 64px;
     justify-self: center;
     margin-inline: auto;
   }
@@ -1936,16 +1936,37 @@
     justify-content: center;
   }
 
+  .hero-float {
+    z-index: 4;
+  }
+
   .hero-float--send {
     display: none;
   }
 
-  .hero-float--swap {
+  .hero-float--om {
+    top: -6%;
     left: -10%;
   }
 
+  .hero-float--in {
+    top: -8%;
+    right: -10%;
+  }
+
+  .hero-float--swap {
+    top: 38%;
+    left: -20%;
+  }
+
   .hero-float--coins {
-    right: -6%;
+    bottom: -4%;
+    right: -16%;
+  }
+
+  .hero-float--analytics {
+    bottom: -6%;
+    left: -14%;
   }
 }
 
@@ -1978,21 +1999,22 @@
   }
 
   .hero-float--om {
-    top: -2%;
-    left: -2%;
+    top: -8%;
+    left: -6%;
     width: 48px;
   }
 
   .hero-float--in {
-    top: -4%;
-    right: -2%;
+    top: -10%;
+    right: -6%;
     width: 46px;
   }
 
   .hero-float--coins {
-    bottom: 2%;
-    right: -2%;
+    bottom: -6%;
+    right: -8%;
     width: 64px;
+    z-index: 4;
   }
 
   .hero__copy {
@@ -3801,6 +3823,10 @@
     max-width: none;
     width: var(--t-card-w);
     scroll-snap-align: start;
+    display: flex;
+    flex-direction: column;
+    align-self: stretch;
+    height: auto;
   }
 
   .testimonials__dots {
@@ -3850,6 +3876,7 @@
   .t-fan {
     --t-cols: 2;
     padding: 8px 16px 12px;
+    align-items: stretch;
   }
 
   .t-card--video {
@@ -3858,13 +3885,23 @@
 
   .t-card__inner {
     transform: none !important;
-    height: auto;
-    min-height: 360px;
+    flex: 1 1 auto;
+    height: 100%;
+    min-height: 420px;
   }
 
   .t-card__media {
     height: 150px;
+    flex-shrink: 0;
     aspect-ratio: auto;
+  }
+
+  .t-card__body {
+    flex: 1 1 auto;
+  }
+
+  .t-card__cta {
+    min-height: 1.4em;
   }
 }
 
