@@ -1392,15 +1392,30 @@
   );
 }
 
+@media (max-width: 1439px) {
+  :root {
+    --rate-strip-gap: 32px;
+    --benefits-overlap: 44px;
+  }
+
+  #hero {
+    min-height: 0;
+    padding-top: clamp(88px, 10vh, 108px);
+    padding-bottom: calc(var(--rate-strip-h, 200px) / 2 + var(--rate-strip-gap) + 16px);
+    align-items: center;
+  }
+}
+
 @media (max-width: 1199px) {
   :root {
-    --rate-strip-gap: 56px;
+    --rate-strip-gap: 28px;
   }
 }
 
 @media (max-width: 809px) {
   :root {
-    --rate-strip-gap: 40px;
+    --rate-strip-gap: 24px;
+    --benefits-overlap: 40px;
   }
 
   #hero {
@@ -1860,7 +1875,7 @@
 
 .hero__title {
   margin: 0 0 24px;
-  font: 800 clamp(40px, 4.6vw, 68px) / 1.05 var(--font-display);
+  font: 700 clamp(40px, 4.6vw, 68px) / 0.98 var(--font-display);
   letter-spacing: -0.05em;
   color: #fff;
   text-align: start;
@@ -1908,11 +1923,13 @@
       "copy";
     justify-items: center;
     text-align: center;
+    row-gap: 20px;
+    padding-bottom: calc(var(--rate-strip-h, 220px) / 2 + var(--rate-strip-gap) + 72px);
   }
 
   .hero__visual {
     width: min(500px, 82vw);
-    padding: 72px 64px;
+    padding: 56px 48px 36px;
     justify-self: center;
     margin-inline: auto;
   }
@@ -1921,6 +1938,7 @@
     text-align: center;
     max-width: min(100%, 640px);
     justify-self: center;
+    padding-bottom: 8px;
   }
 
   .hero__title,
@@ -1928,8 +1946,14 @@
     text-align: center;
   }
 
+  .hero__title {
+    line-height: 0.92;
+    margin-bottom: 16px;
+  }
+
   .hero__lead {
     margin-inline: auto;
+    margin-bottom: 24px;
   }
 
   .hero__actions {
@@ -1972,8 +1996,8 @@
 
 @media (max-width: 810px) {
   #hero {
-    padding: 112px var(--section-pad-x) calc(var(--rate-strip-h, 220px) / 2 + var(--rate-strip-gap) + var(--benefits-overlap));
-    gap: 28px;
+    padding: 100px var(--section-pad-x) calc(var(--rate-strip-h, 200px) / 2 + var(--rate-strip-gap) + 64px);
+    gap: 20px;
     align-content: start;
   }
 
@@ -2095,8 +2119,8 @@
 
 @media (max-width: 425px) {
   #hero {
-    padding: 124px var(--section-pad-x) calc(var(--rate-strip-h, 220px) / 2 + var(--rate-strip-gap) + var(--benefits-overlap));
-    gap: 22px;
+    padding: 108px var(--section-pad-x) calc(var(--rate-strip-h, 200px) / 2 + var(--rate-strip-gap) + 56px);
+    gap: 18px;
   }
 
   .hero__visual {
