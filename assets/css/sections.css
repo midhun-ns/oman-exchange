@@ -5036,10 +5036,10 @@
   color: #fff;
 }
 
-@media (max-width: 1199px) and (min-width: 810px) {
+@media (max-width: 1299px) {
   .site-footer {
-    --footer-wm-h: 260px;
-    padding-top: 80px;
+    --footer-wm-h: 200px;
+    padding: 56px 32px 0;
   }
 
   .footer-wordmark {
@@ -5051,36 +5051,97 @@
   }
 
   .footer-arch {
-    border-radius: 80px 80px 0 0;
+    left: 32px;
+    right: 32px;
+    border-radius: 72px 72px 0 0;
   }
 
   .footer-links {
-    height: auto;
-    padding: 48px 48px 24px;
+    min-height: 0;
+    padding: 32px 36px 12px;
+  }
+
+  .footer-top {
+    top: -22px;
+    width: 40px;
+    height: 40px;
   }
 
   .footer-card {
-    padding: 32px;
+    min-height: 0;
+    padding: 24px 28px;
     border-radius: 48px 48px 0 0;
-    flex-direction: column;
     gap: 20px;
+    align-items: flex-start;
   }
 
   .footer-card__title {
-    font-size: 28px;
-    line-height: 28px;
+    font-size: 24px;
+    line-height: 1.1;
+  }
+
+  .footer-card__cols {
+    gap: 14px;
+  }
+
+  .footer-card__col {
+    gap: 0;
+  }
+
+  .footer-card__col a {
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  .footer-bottom {
+    height: 80px;
+    border-radius: 64px 64px 0 0;
   }
 
   .footer-bottom__row {
-    padding: 0 48px;
+    padding: 0 36px;
+    gap: 16px;
+  }
+
+  .footer-bottom__copy {
+    font-size: 12px;
+    line-height: 18px;
+  }
+}
+
+@media (max-width: 1199px) and (min-width: 810px) {
+  .site-footer {
+    --footer-wm-h: 180px;
+    padding-top: 48px;
+  }
+
+  .footer-links {
+    padding: 28px 28px 8px;
+  }
+
+  .footer-card {
+    padding: 20px 24px;
+    gap: 16px;
+  }
+
+  .footer-card__title {
+    font-size: 22px;
+  }
+
+  .footer-card__cols {
+    gap: 12px;
+  }
+
+  .footer-bottom__row {
+    padding: 0 28px;
   }
 }
 
 @media (max-width: 809px) {
   .site-footer {
-    padding: 72px var(--section-pad-x) 0;
+    padding: 48px var(--section-pad-x) 0;
     min-height: 0;
-    --footer-wm-h: 160px;
+    --footer-wm-h: 140px;
   }
 
   .footer-wordmark {
@@ -5102,44 +5163,44 @@
 
   .footer-links {
     height: auto;
-    padding: 40px 16px 16px;
+    padding: 28px 16px 12px;
   }
 
   .footer-cards {
     flex-direction: column;
-    gap: 8px;
+    gap: 6px;
   }
 
   .footer-card {
     flex-direction: column;
-    gap: 20px;
-    padding: 28px 24px;
-    border-radius: 40px 40px 0 0;
+    gap: 12px;
+    padding: 20px 20px 16px;
+    border-radius: 36px 36px 0 0;
     min-height: 0;
   }
 
   .footer-card__title {
-    font-size: 28px;
-    line-height: 28px;
+    font-size: 22px;
+    line-height: 1.1;
   }
 
   .footer-card__cols {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 16px 24px;
+    gap: 8px 20px;
     width: 100%;
   }
 
   .footer-bottom {
     height: auto;
-    padding: 32px 24px;
-    border-radius: 48px 48px 0 0;
+    padding: 24px 20px;
+    border-radius: 40px 40px 0 0;
   }
 
   .footer-bottom__row {
     flex-direction: column;
     padding: 0;
-    gap: 12px;
+    gap: 10px;
     text-align: center;
   }
 
