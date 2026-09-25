@@ -140,7 +140,19 @@ h1 {
   line-height: 1.05;
 }
 
+.h2,
+h2 {
+  font-family: var(--font-display);
+  font-weight: var(--text-h2-weight);
+}
+
 .h3,
+h3,
+h4 {
+  font-family: var(--font-display);
+  font-weight: var(--text-h3-weight);
+}
+
 h2.section-title,
 .section-title {
   font-family: var(--font-display);
