@@ -1408,54 +1408,97 @@
 }
 
 /* Keep right-side floats/orbits inside the viewport */
-@media (max-width: 1299px) and (min-width: 1025px) {
+@media (max-width: 1439px) and (min-width: 1025px) {
+  #hero {
+    column-gap: clamp(16px, 2vw, 36px);
+  }
+
   .hero__visual {
-    width: min(420px, 100%);
+    width: min(440px, 100%);
     max-width: 100%;
     justify-self: center;
-    padding: clamp(32px, 4vw, 48px) clamp(44px, 4.5vw, 56px);
+    margin-inline: 0;
+    padding: clamp(32px, 4vw, 52px) clamp(44px, 5vw, 60px);
   }
 
   .hero__orbits {
-    inset: 12% 10%;
+    inset: 12% 12%;
   }
 
   .hero__orbit-ring:nth-child(2) {
-    inset: -4%;
+    inset: -3%;
   }
 
   .hero__orbit-ring:nth-child(3) {
-    inset: -10%;
+    inset: -9%;
   }
 
   .hero-float--in {
-    top: 2%;
-    right: 6%;
-    width: clamp(52px, 5vw, 64px);
+    top: 4%;
+    right: 8%;
+    width: clamp(50px, 4.8vw, 64px);
   }
 
   .hero-float--send {
-    top: 36%;
-    right: 4%;
-    width: clamp(48px, 4.5vw, 60px);
+    top: 38%;
+    right: 6%;
+    width: clamp(46px, 4.2vw, 58px);
   }
 
   .hero-float--coins {
-    bottom: 8%;
-    right: 4%;
-    width: clamp(64px, 6vw, 80px);
+    bottom: 10%;
+    right: 6%;
+    width: clamp(60px, 5.8vw, 78px);
   }
 
   .hero-float--om {
-    left: 2%;
+    left: 4%;
   }
 
   .hero-float--swap {
-    left: -2%;
+    left: 0;
   }
 
   .hero-float--analytics {
+    left: 4%;
+  }
+}
+
+@media (max-width: 1299px) and (min-width: 1025px) {
+  .hero__visual {
+    width: min(400px, 100%);
+    padding: clamp(28px, 3.5vw, 44px) clamp(48px, 5vw, 64px);
+  }
+
+  .hero__orbits {
+    inset: 14% 14%;
+  }
+
+  .hero-float--in {
+    right: 10%;
+    width: clamp(48px, 4.5vw, 60px);
+  }
+
+  .hero-float--send {
+    right: 8%;
+    width: clamp(44px, 4vw, 56px);
+  }
+
+  .hero-float--coins {
+    right: 8%;
+    width: clamp(58px, 5.5vw, 72px);
+  }
+
+  .hero-float--om {
+    left: 6%;
+  }
+
+  .hero-float--swap {
     left: 2%;
+  }
+
+  .hero-float--analytics {
+    left: 6%;
   }
 }
 
@@ -2023,27 +2066,27 @@
 
   .hero-float--om {
     top: -4%;
-    left: 0;
+    left: 4%;
   }
 
   .hero-float--in {
     top: -6%;
-    right: 0;
+    right: 4%;
   }
 
   .hero-float--swap {
     top: 38%;
-    left: -6%;
+    left: 0;
   }
 
   .hero-float--coins {
-    bottom: 0;
-    right: -2%;
+    bottom: 2%;
+    right: 4%;
   }
 
   .hero-float--analytics {
-    bottom: -2%;
-    left: -2%;
+    bottom: 0;
+    left: 2%;
   }
 }
 
@@ -2088,40 +2131,40 @@
 
   .hero-float--om {
     top: -6%;
-    left: -2%;
+    left: 2%;
     width: 48px;
   }
 
   .hero-float--in {
     top: -8%;
-    right: -2%;
+    right: 2%;
     width: 46px;
   }
 
   .hero-float--swap {
     display: block;
     top: 36%;
-    left: -8%;
+    left: 0;
     width: 44px;
   }
 
   .hero-float--send {
     display: block;
     top: 32%;
-    right: -8%;
+    right: 2%;
     width: 40px;
   }
 
   .hero-float--coins {
-    bottom: 0;
-    right: -6%;
+    bottom: 2%;
+    right: 2%;
     width: 50px;
   }
 
   .hero-float--analytics {
     display: block;
     bottom: 2%;
-    left: -6%;
+    left: 2%;
     width: 46px;
   }
 
@@ -2246,40 +2289,40 @@
 
   .hero-float--om {
     top: -6%;
-    left: 0;
+    left: 4%;
     width: 40px;
   }
 
   .hero-float--in {
     top: -8%;
-    right: 0;
+    right: 4%;
     width: 38px;
   }
 
   .hero-float--swap {
     display: block;
     top: 34%;
-    left: -6%;
+    left: 2%;
     width: 38px;
   }
 
   .hero-float--send {
     display: block;
     top: 30%;
-    right: -6%;
+    right: 4%;
     width: 36px;
   }
 
   .hero-float--coins {
-    bottom: 2%;
-    right: -4%;
+    bottom: 4%;
+    right: 4%;
     width: 44px;
   }
 
   .hero-float--analytics {
     display: block;
     bottom: 4%;
-    left: -4%;
+    left: 4%;
     width: 40px;
   }
 
@@ -3415,7 +3458,7 @@
   display: flex;
   flex-direction: column-reverse;
   gap: 6px;
-}
+} 
 
 .presence__stats > div:first-child {
   padding-inline-start: 0;
@@ -4733,8 +4776,8 @@
   position: relative;
   overflow: hidden;
   background: var(--hero-bg);
-  min-height: 640px;
-  padding: 120px 48px 0;
+  min-height: 0;
+  padding: 96px 48px 0;
   color: #fff;
   border: 0;
   --footer-wm-h: 313px;
@@ -4796,12 +4839,11 @@
 }
 
 .footer-main {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  position: relative;
   z-index: 2;
-  min-height: 360px;
+  /* Always expose the top 50% of the wordmark; underlap the rest */
+  margin-top: calc(var(--footer-wm-h) * -0.5);
+  min-height: 0;
   height: auto;
   display: flex;
   flex-direction: column;
@@ -4996,9 +5038,8 @@
 
 @media (max-width: 1199px) and (min-width: 810px) {
   .site-footer {
-    /* pad(120) + wm(280) + main(400) - 50% wm underlap(140) ≈ 660 */
-    min-height: 680px;
-    --footer-wm-h: 280px;
+    --footer-wm-h: 260px;
+    padding-top: 80px;
   }
 
   .footer-wordmark {
@@ -5006,14 +5047,7 @@
   }
 
   .footer-main {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    margin-top: 0;
-    z-index: 2;
-    height: auto;
-    min-height: 400px;
+    margin-top: calc(var(--footer-wm-h) * -0.5);
   }
 
   .footer-arch {
@@ -5022,7 +5056,7 @@
 
   .footer-links {
     height: auto;
-    padding: 56px 48px 24px;
+    padding: 48px 48px 24px;
   }
 
   .footer-card {
@@ -5044,7 +5078,7 @@
 
 @media (max-width: 809px) {
   .site-footer {
-    padding: 80px var(--section-pad-x) 0;
+    padding: 72px var(--section-pad-x) 0;
     min-height: 0;
     --footer-wm-h: 160px;
   }
