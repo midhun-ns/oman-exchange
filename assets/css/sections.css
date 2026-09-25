@@ -1978,13 +1978,26 @@
   }
 
   .hero__visual {
-    width: 100%;
-    max-width: 400px;
-    padding: 36px 16px 24px;
+    width: min(100% - 24px, 460px);
+    max-width: 460px;
+    padding: 48px 40px 40px;
+  }
+
+  .hero__orbits {
+    inset: 10% 8%;
+  }
+
+  .hero__orbit-ring:nth-child(2) {
+    inset: -8%;
+  }
+
+  .hero__orbit-ring:nth-child(3) {
+    inset: -16%;
   }
 
   .fx {
     width: 100%;
+    margin-inline: auto;
     border-radius: 28px;
   }
 
@@ -1992,29 +2005,47 @@
     font-size: 26px;
   }
 
-  .hero-float--swap,
-  .hero-float--send,
-  .hero-float--analytics {
-    display: none;
+  .hero-float {
+    z-index: 4;
   }
 
   .hero-float--om {
-    top: -8%;
-    left: -6%;
+    top: -6%;
+    left: -2%;
     width: 48px;
   }
 
   .hero-float--in {
-    top: -10%;
-    right: -6%;
+    top: -8%;
+    right: -2%;
     width: 46px;
   }
 
-  .hero-float--coins {
-    bottom: -6%;
+  .hero-float--swap {
+    display: block;
+    top: 36%;
+    left: -8%;
+    width: 44px;
+  }
+
+  .hero-float--send {
+    display: block;
+    top: 32%;
     right: -8%;
-    width: 64px;
-    z-index: 4;
+    width: 40px;
+  }
+
+  .hero-float--coins {
+    bottom: 0;
+    right: -6%;
+    width: 50px;
+  }
+
+  .hero-float--analytics {
+    display: block;
+    bottom: 2%;
+    left: -6%;
+    width: 46px;
   }
 
   .hero__copy {
@@ -2069,11 +2100,25 @@
   }
 
   .hero__visual {
-    max-width: 100%;
-    padding: 24px 10px 16px;
+    max-width: 400px;
+    width: min(100% - 16px, 400px);
+    padding: 44px 34px 36px;
+  }
+
+  .hero__orbits {
+    inset: 12% 10%;
+  }
+
+  .hero__orbit-ring:nth-child(2) {
+    inset: -6%;
+  }
+
+  .hero__orbit-ring:nth-child(3) {
+    inset: -12%;
   }
 
   .fx {
+    width: 100%;
     border-radius: 22px;
     padding: 6px;
   }
@@ -2123,21 +2168,42 @@
   }
 
   .hero-float--om {
-    top: 0;
+    top: -6%;
     left: 0;
-    width: 36px;
+    width: 40px;
   }
 
   .hero-float--in {
-    top: -2%;
+    top: -8%;
     right: 0;
-    width: 34px;
+    width: 38px;
+  }
+
+  .hero-float--swap {
+    display: block;
+    top: 34%;
+    left: -6%;
+    width: 38px;
+  }
+
+  .hero-float--send {
+    display: block;
+    top: 30%;
+    right: -6%;
+    width: 36px;
   }
 
   .hero-float--coins {
+    bottom: 2%;
+    right: -4%;
+    width: 44px;
+  }
+
+  .hero-float--analytics {
+    display: block;
     bottom: 4%;
-    right: 0;
-    width: 48px;
+    left: -4%;
+    width: 40px;
   }
 
   .hero__copy {
