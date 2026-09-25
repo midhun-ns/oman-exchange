@@ -1403,6 +1403,59 @@
     padding-top: clamp(88px, 10vh, 108px);
     padding-bottom: calc(var(--rate-strip-h, 200px) / 2 + var(--rate-strip-gap) + 16px);
     align-items: center;
+    overflow-x: clip;
+  }
+}
+
+/* Keep right-side floats/orbits inside the viewport on mid desktops */
+@media (max-width: 1439px) and (min-width: 1025px) {
+  .hero__visual {
+    width: min(460px, 100%);
+    max-width: 100%;
+    justify-self: center;
+    padding: clamp(36px, 4.5vw, 56px) clamp(40px, 4vw, 56px);
+  }
+
+  .hero__orbits {
+    inset: 10% 8%;
+  }
+
+  .hero__orbit-ring:nth-child(2) {
+    inset: -6%;
+  }
+
+  .hero__orbit-ring:nth-child(3) {
+    inset: -14%;
+  }
+
+  .hero-float--in {
+    top: 2%;
+    right: 4%;
+    width: clamp(56px, 5.5vw, 70px);
+  }
+
+  .hero-float--send {
+    top: 36%;
+    right: 0;
+    width: clamp(52px, 5vw, 66px);
+  }
+
+  .hero-float--coins {
+    bottom: 8%;
+    right: 2%;
+    width: clamp(72px, 7vw, 88px);
+  }
+
+  .hero-float--om {
+    left: 0;
+  }
+
+  .hero-float--swap {
+    left: -6%;
+  }
+
+  .hero-float--analytics {
+    left: 0;
   }
 }
 
