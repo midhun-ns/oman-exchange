@@ -189,7 +189,7 @@ function initTestimonials(gsap) {
 
   const mm = gsap.matchMedia();
 
-  mm.add("(min-width: 1024px) and (prefers-reduced-motion: no-preference)", () => {
+  mm.add("(min-width: 1025px) and (prefers-reduced-motion: no-preference)", () => {
     const from = [
       [".t-card--award", { x: "-60vw", y: "-8vh", rotation: -16 }, 1],
       [".t-card--milestone", { x: "60vw", y: "-8vh", rotation: 16 }, 1],
@@ -249,7 +249,7 @@ function initTestimonials(gsap) {
     };
   });
 
-  mm.add("(max-width: 1023px) and (prefers-reduced-motion: no-preference)", () => {
+  mm.add("(max-width: 1024px) and (prefers-reduced-motion: no-preference)", () => {
     gsap.set(cards, { autoAlpha: 0, y: 32 });
     gsap.to(cards, {
       y: 0,

@@ -3752,28 +3752,33 @@
   display: none;
 }
 
-@media (max-width: 1199px) and (min-width: 1024px) {
+@media (max-width: 1199px) and (min-width: 1025px) {
   .t-stage {
-    padding: 100px 32px 40px;
+    padding: 88px 32px 40px;
+  }
+
+  .t-content {
+    max-width: 480px;
+    padding-inline: 12px;
   }
 
   .t-content h2 {
-    font-size: 44px;
+    font-size: 40px;
   }
 
   .t-card {
-    --w: 220px;
-    --h: 300px;
+    --w: 200px;
+    --h: 280px;
   }
 
-  .t-card--award { --x: 10%; --y: 12%; }
-  .t-card--milestone { --x: 90%; --y: 12%; }
-  .t-card--partner { --x: 30%; --y: 54%; }
-  .t-card--community { --x: 70%; --y: 54%; }
-  .t-card--video { --x: 50%; --y: 59%; }
+  .t-card--award { --x: 8%; --y: 30%; }
+  .t-card--milestone { --x: 92%; --y: 30%; }
+  .t-card--partner { --x: 28%; --y: 58%; }
+  .t-card--community { --x: 72%; --y: 58%; }
+  .t-card--video { --x: 50%; --y: 62%; }
 }
 
-@media (max-width: 1023px) {
+@media (max-width: 1024px) {
   #testimonials {
     padding: 48px var(--section-pad-x);
   }
@@ -3791,6 +3796,7 @@
 
   .t-content {
     max-width: 100%;
+    z-index: 1;
   }
 
   .t-content h2 {
@@ -3810,6 +3816,7 @@
     pointer-events: auto;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
+    z-index: 1;
   }
 
   .t-fan::-webkit-scrollbar {
