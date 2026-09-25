@@ -16,7 +16,6 @@
   font-size: 14px;
   font-weight: 900;
   letter-spacing: -0.28px;
-  text-transform: uppercase;
   text-decoration: none;
   white-space: nowrap;
   transition:
@@ -102,7 +101,6 @@
   font-size: 14px;
   font-weight: 900;
   letter-spacing: -0.28px;
-  text-transform: uppercase;
   line-height: 1;
 }
 
@@ -389,7 +387,6 @@
   font-size: clamp(1.25rem, 1rem + 1vw, 1.5rem);
   font-weight: 900;
   letter-spacing: -0.6px;
-  text-transform: uppercase;
   margin-bottom: var(--space-3);
 }
 
@@ -437,7 +434,6 @@
   font-size: clamp(2rem, 1.5rem + 2vw, 2.75rem);
   font-weight: 900;
   letter-spacing: -1.4px;
-  text-transform: uppercase;
   line-height: 1;
 }
 
@@ -461,7 +457,6 @@
   font-weight: 900;
   letter-spacing: -2px;
   line-height: 0.95;
-  text-transform: uppercase;
 }
 
 .metric-card__label {
@@ -469,7 +464,6 @@
   font-size: 18px;
   font-weight: 900;
   letter-spacing: -0.5px;
-  text-transform: uppercase;
 }
 
 .metric-card__support {
@@ -524,7 +518,6 @@
   font-size: 11px;
   font-weight: 900;
   letter-spacing: -0.2px;
-  text-transform: uppercase;
   white-space: nowrap;
 }
 
@@ -541,7 +534,6 @@
   font-size: 14px;
   font-weight: 900;
   letter-spacing: -0.28px;
-  text-transform: uppercase;
   color: var(--text-muted);
 }
 
@@ -555,7 +547,6 @@
   font-weight: 900;
   letter-spacing: -1px;
   line-height: 1;
-  text-transform: uppercase;
 }
 
 .rate-card__base {
@@ -614,7 +605,6 @@
   font-size: 12px;
   font-weight: 500;
   color: var(--text-muted);
-  text-transform: uppercase;
   letter-spacing: 0.04em;
 }
 
@@ -623,7 +613,6 @@
   font-size: 1.15rem;
   font-weight: 900;
   letter-spacing: -0.4px;
-  text-transform: uppercase;
   line-height: 1.2;
 }
 
@@ -690,7 +679,6 @@
 .testimonial-card__author {
   font-family: var(--font-display);
   font-weight: 900;
-  text-transform: uppercase;
   letter-spacing: -0.4px;
   margin-top: auto;
 }
@@ -746,7 +734,6 @@
   font-weight: 900;
   font-size: 15px;
   letter-spacing: -0.4px;
-  text-transform: uppercase;
 }
 
 /* —— Converter —— */
@@ -780,7 +767,6 @@
   font-size: 12px;
   font-weight: 500;
   color: var(--text-muted);
-  text-transform: uppercase;
   letter-spacing: 0.04em;
 }
 
@@ -822,7 +808,6 @@
   font-size: 1.5rem;
   font-weight: 900;
   letter-spacing: -0.8px;
-  text-transform: uppercase;
 }
 
 .converter__disclaimer,
@@ -855,7 +840,6 @@
   font-size: 13px;
   font-weight: 900;
   letter-spacing: -0.26px;
-  text-transform: uppercase;
   color: var(--text-secondary);
 }
 
@@ -896,7 +880,6 @@
   font-size: 14px;
   font-weight: 900;
   letter-spacing: -0.28px;
-  text-transform: uppercase;
   color: var(--white-60);
   background: transparent;
   border: 1px solid var(--white-20);
@@ -937,7 +920,6 @@
   font-size: 1.1rem;
   font-weight: 900;
   letter-spacing: -0.4px;
-  text-transform: uppercase;
   margin-bottom: var(--space-3);
 }
 
@@ -972,7 +954,6 @@
   font-size: clamp(1rem, 0.9rem + 0.5vw, 1.15rem);
   font-weight: 900;
   letter-spacing: -0.4px;
-  text-transform: uppercase;
 }
 
 .accordion__icon {
@@ -1118,7 +1099,6 @@
   font-size: clamp(1.75rem, 1.2rem + 2vw, 2.75rem);
   font-weight: 900;
   letter-spacing: -1.2px;
-  text-transform: uppercase;
   line-height: 1.1;
 }
 
@@ -1201,7 +1181,6 @@
   font-family: var(--font-display);
   font-weight: 900;
   font-size: 12px;
-  text-transform: uppercase;
 }
 
 .socials {
@@ -1275,7 +1254,6 @@
   font-size: 14px;
   font-weight: 900;
   letter-spacing: -0.28px;
-  text-transform: uppercase;
   margin-bottom: var(--space-4);
 }
 

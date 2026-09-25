@@ -190,29 +190,20 @@ function initProof(gsap) {
 
 function initTestimonials(gsap) {
   const section = document.querySelector("#testimonials");
-  const stage = section?.querySelector(".t-stage");
   const cards = gsap.utils.toArray("#testimonials [data-testimonial-card]");
-  if (!section || !stage || !cards.length) return;
+  if (!section || !cards.length) return;
 
   const mm = gsap.matchMedia();
 
   mm.add("(min-width: 1025px) and (prefers-reduced-motion: no-preference)", () => {
-    const from = [
-      [".t-card--award", { x: "-60vw", y: "-8vh", rotation: -16 }, 1],
-      [".t-card--milestone", { x: "60vw", y: "-8vh", rotation: 16 }, 1],
-      [".t-card--partner", { x: "-60vw", y: "8vh", rotation: -12 }, 2],
-      [".t-card--community", { x: "60vw", y: "8vh", rotation: 12 }, 2],
-      [".t-card--video", { y: "50vh", scale: 0.9 }, 3],
-    ];
+    gsap.set(cards, { autoAlpha: 0, y: 36 });
 
-    // Hidden until scroll intro plays
-    from.forEach(([sel, vars, z]) => {
-      const el = section.querySelector(sel);
-      if (!el) return;
-      gsap.set(el, { ...vars, autoAlpha: 0, zIndex: z });
-    });
-
-    const tl = gsap.timeline({
+    const tween = gsap.to(cards, {
+      y: 0,
+      autoAlpha: 1,
+      duration: 0.7,
+      stagger: 0.1,
+      ease: "power3.out",
       scrollTrigger: {
         trigger: section,
         start: "top 70%",
@@ -220,45 +211,16 @@ function initTestimonials(gsap) {
       },
     });
 
-    from.forEach(([sel, , z], i) => {
-      const el = section.querySelector(sel);
-      if (!el) return;
-      tl.to(
-        el,
-        {
-          x: 0,
-          y: 0,
-          rotation: 0,
-          scale: 1,
-          autoAlpha: 1,
-          duration: 1.1,
-          ease: "power3.out",
-          onStart: () => gsap.set(el, { zIndex: 5 }),
-          onComplete: () => gsap.set(el, { zIndex: z, clearProps: "transform" }),
-        },
-        i * 0.18
-      );
-    });
-
-    const pin = ScrollTrigger.create({
-      trigger: section,
-      start: "top top",
-      end: "+=100%",
-      pin: stage,
-      pinSpacing: true,
-    });
-
     return () => {
-      tl.scrollTrigger?.kill();
-      tl.kill();
-      pin.kill();
-      gsap.set(cards, { clearProps: "opacity,visibility,transform,zIndex" });
+      tween.scrollTrigger?.kill();
+      tween.kill();
+      gsap.set(cards, { clearProps: "opacity,visibility,transform" });
     };
   });
 
   mm.add("(max-width: 1024px) and (prefers-reduced-motion: no-preference)", () => {
     gsap.set(cards, { autoAlpha: 0, y: 32 });
-    gsap.to(cards, {
+    const tween = gsap.to(cards, {
       y: 0,
       autoAlpha: 1,
       duration: 0.7,
@@ -270,6 +232,12 @@ function initTestimonials(gsap) {
         toggleActions: "play none none none",
       },
     });
+
+    return () => {
+      tween.scrollTrigger?.kill();
+      tween.kill();
+      gsap.set(cards, { clearProps: "opacity,visibility,transform" });
+    };
   });
 }
 

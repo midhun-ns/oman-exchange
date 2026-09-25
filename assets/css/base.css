@@ -138,7 +138,6 @@ h1 {
   font-size: clamp(2rem, 1.4rem + 2.5vw, var(--text-h1-size));
   letter-spacing: clamp(-1.6px, -0.05em, var(--text-h1-tracking));
   line-height: 1.05;
-  text-transform: uppercase;
 }
 
 .h3,
@@ -149,7 +148,6 @@ h2.section-title,
   font-size: clamp(1.75rem, 1.3rem + 1.8vw, var(--text-h3-size));
   letter-spacing: clamp(-1.2px, -0.05em, var(--text-h3-tracking));
   line-height: 1.1;
-  text-transform: uppercase;
 }
 
 .t-closing {
@@ -158,7 +156,6 @@ h2.section-title,
   font-size: clamp(3.5rem, 2rem + 10vw, var(--text-closing-size));
   letter-spacing: clamp(-3.2px, -0.05em, var(--text-closing-tracking));
   line-height: 0.92;
-  text-transform: uppercase;
 }
 
 .t-lead {
@@ -344,7 +341,6 @@ h2.section-title,
   font-size: var(--text-small-size);
   font-weight: 900;
   letter-spacing: -0.28px;
-  text-transform: uppercase;
   text-align: center;
   padding: var(--space-6);
   min-height: 8rem;
@@ -403,7 +399,6 @@ h2.section-title,
   font-size: 12px;
   font-weight: 900;
   letter-spacing: 0.08em;
-  text-transform: uppercase;
   color: var(--grey-400);
   margin-bottom: var(--space-4);
 }

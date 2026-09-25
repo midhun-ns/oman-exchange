@@ -1,6 +1,6 @@
 /**
  * LuLu Exchange Oman — design tokens.
- * Brand scale matches the hero blues (#063a6b / #116bb9 / #00A1ED).
+ * Brand blues match luluexchange.com.om (#0390DF / #00A1ED / #00AEEF).
  */
 
 :root {
@@ -24,22 +24,22 @@
   --white-20: #ffffff33;
   --white-05: #ffffff0d;
 
-  /* Shared LuLu hero blue */
+  /* Shared LuLu hero blue — live site brand */
   --hero-bg:
-    radial-gradient(60% 55% at 50% 38%, rgba(0, 161, 237, 0.28) 0%, rgba(0, 161, 237, 0) 70%),
-    radial-gradient(40% 50% at 12% 20%, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0) 70%),
-    radial-gradient(45% 60% at 92% 85%, rgba(17, 107, 185, 0.28) 0%, rgba(17, 107, 185, 0) 70%),
-    linear-gradient(90deg, #063a6b 0%, #116bb9 100%);
+    radial-gradient(60% 55% at 50% 38%, rgba(255, 255, 255, 0.28) 0%, rgba(255, 255, 255, 0) 70%),
+    radial-gradient(40% 50% at 12% 20%, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0) 70%),
+    radial-gradient(45% 60% at 92% 85%, rgba(0, 174, 239, 0.35) 0%, rgba(0, 174, 239, 0) 70%),
+    linear-gradient(105deg, #0390df 0%, #00a1ed 52%, #00aeef 100%);
 
-  /* Brand — hero-matched blues (kept as --violet-* for existing selectors) */
-  --violet-900: #063a6b;
-  --violet-800: #116bb9;
+  /* Brand — live-site blues (kept as --violet-* for existing selectors) */
+  --violet-900: #0173a7;
+  --violet-800: #0390df;
   --violet-500: #00a1ed;
   --violet-300: #4db8e8;
   --violet-200: #9ad4f0;
   --violet-tag: #7ec8eb;
-  --faq-active: rgba(17, 107, 185, 0.12);
-  --brand-grad: linear-gradient(#00a1ed, #063a6b);
+  --faq-active: rgba(0, 161, 237, 0.14);
+  --brand-grad: linear-gradient(#00aeef, #0173a7);
 
   /* Aliases used by styleguide / components */
   --brand: var(--violet-800);
@@ -52,8 +52,8 @@
   --grey-50: var(--grey-100);
 
   /* Typography */
-  --font-display: "Roboto Condensed", sans-serif;
-  --font-body: "Geist", system-ui, sans-serif;
+  --font-display: "Inter Tight", system-ui, sans-serif;
+  --font-body: "Inter Tight", system-ui, sans-serif;
 
   --text-h1-size: 128px;
   --text-h1-weight: 900;
@@ -64,11 +64,11 @@
   --text-closing-size: 128px;
   --text-closing-weight: 900;
   --text-closing-tracking: -0.05em;
-  --text-body-size: 16px;
+  --text-body-size: 22px;
   --text-body-weight: 400;
   --text-body-tracking: -0.02em;
   --text-small-size: 14px;
-  --text-lead-size: 20px;
+  --text-lead-size: 22px;
 
   /* Radii */
   --r-chip: 8px;
