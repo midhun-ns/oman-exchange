@@ -164,20 +164,27 @@ function initProof(gsap) {
     return;
   }
 
-  // Duplicate text for wide ticker
-  ticker.textContent = `${ticker.textContent} ${ticker.textContent}`;
+  // Duplicate text for seamless scrub
+  const base = ticker.textContent.trim();
+  ticker.textContent = `${base} ${base}`;
+
+  const sync = (progress) => {
+    const x = gsap.utils.interpolate(0, -50, progress);
+    gsap.set(ticker, { xPercent: x, yPercent: -50 });
+    const idx = Math.min(cards.length - 1, Math.floor(progress * cards.length));
+    cards.forEach((c, i) => c.classList.toggle("is-active", i === idx));
+  };
+
+  // Start at the beginning of "Trusted by millions"
+  sync(0);
 
   ScrollTrigger.create({
     trigger: section,
     start: "top top",
     end: "bottom bottom",
     scrub: 1,
-    onUpdate: (self) => {
-      const x = gsap.utils.interpolate(20, -60, self.progress);
-      gsap.set(ticker, { xPercent: x });
-      const idx = Math.min(cards.length - 1, Math.floor(self.progress * cards.length));
-      cards.forEach((c, i) => c.classList.toggle("is-active", i === idx));
-    },
+    onUpdate: (self) => sync(self.progress),
+    onRefresh: (self) => sync(self.progress),
   });
 }
 

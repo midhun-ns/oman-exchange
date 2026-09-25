@@ -2923,6 +2923,8 @@
 
 .proof__ticker {
   position: absolute;
+  left: 0;
+  top: 50%;
   white-space: nowrap;
   font-family: var(--font-display);
   font-weight: 900;
@@ -3009,6 +3011,8 @@
 
   .proof__ticker {
     position: static;
+    left: auto;
+    top: auto;
     white-space: normal;
     font-size: 36px;
     margin-bottom: 2rem;
